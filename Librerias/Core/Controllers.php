@@ -6,6 +6,7 @@ class Controllers
 {
     protected ?object $model = null;
     protected Views $views;
+    protected  $data = []; // Propiedad tipada como array
 
     public function __construct()
     {
