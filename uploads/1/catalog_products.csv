@@ -1,0 +1,396 @@
+"# Obligatorio | Identificador de contenido único del artículo. Se recomienda usar el SKU del artículo. Cada identificador de contenido debe aparecer una sola vez en el catálogo. Para publicar anuncios dinámicos; este identificador debe coincidir exactamente con el identificador de contenido del mismo artículo en el código del píxel de Facebook. Límite de caracteres: 100.","# Obligatorio | Título específico y relevante para el artículo. Consulta las especificaciones sobre títulos : https://www.facebook.com/business/help/2104231189874655. Límite de caracteres: 150.","# Obligatorio | A short and relevant description of the item. Include specific or unique product features like material or color. Use plain text and don't enter text in all capital letters. See description specifications: https://www.facebook.com/business/help/2302017289821154 Character limit: 9999","# Obligatorio | The current availability of the item. | Supported values: in stock; out of stock | Supported values: in stock; available for order; preorder; out of stock; discontinued","# Obligatorio | The condition of the item. Enter one of the following: new; refurbished; used | Supported values: new; refurbished; used","# Obligatorio | Precio del artículo. El formato del precio debe ser un número seguido del código de divisa de 3 letras (norma ISO 4217). Usa un punto () como separador decimal; no uses coma.","# Obligatorio | URL de la página del producto específica donde las personas pueden comprar el artículo.","# Obligatorio | URL de la imagen principal de tu artículo. Las imágenes deben estar en un formato compatible (JPG/GIF/PNG) y su tamaño debe ser de 500 x 500 píxeles como mínimo.","# Opcional | URL de la images separadas por coma. Las imágenes deben estar en un formato compatible (JPG/GIF/PNG) y su tamaño debe ser de 500 x 500 píxeles como mínimo.","# Obligatorio | Marca del artículo. En su lugar; también puedes ingresar un número único de pieza del fabricante (MPN) o un número mundial de artículo comercial (GTIN). Un GTIN puede ser uno de los números siguientes: UPC; EAN; JAN o ISBN. Límite de caracteres: 100.","# Opcional | Categoría de productos de Google para el artículo. Obtén más información sobre las categorías de productos: https://www.facebook.com/business/help/526764014610932 .","# Opcional | Categoría de productos de Facebook para el artículo. Obtén más información sobre las categorías de productos: https://www.facebook.com/business/help/526764014610932 .","# Opcional | The quantity of this item you have to sell on Facebook and Instagram with checkout. Must be 1 or higher or the item won't be buyable","# Opcional | Precio con descuento del artículo si está en oferta. El formato del precio debe ser un número seguido del código de divisa de 3 letras (estándar ISO 4217). Usa un punto (.) como separador decimal; no uses coma. Es obligatorio indicar el precio de oferta si quieres usar texto superpuesto para mostrar precios con descuento.","# Opcional | Intervalo del período de oferta; incluidas la fecha y la hora o zona horaria del inicio y la finalización de la oferta. Si no ingresas las fechas; los artículos con el campo 'sale_price' permanecerán en oferta hasta que elimines el precio de oferta. Usa este formato: YYYY-MM-DDT23:59+00:00/YYYY-MM-DDT23:59+00:00. Ingresa la fecha de inicio de la siguiente manera: YYYY-MM-DD. Escribe una 'T'. A continuación; ingresa la hora de inicio en formato de 24 horas (00:00 a 23:59) seguida de la zona horaria UTC (-12:00 a +14:00). Escribe una barra (' / ') y repite el mismo formato para la fecha y hora de finalización. En la siguiente fila de ejemplo se usa la zona horaria del Pacífico (-08:00).","# Opcional | Use this field to create variants of the same item. Enter the same group ID for all variants within a group. Learn more about variants: https://www.facebook.com/business/help/2256580051262113 Character limit: 100.","# Opcional | Género de una persona a la que se dirige el artículo. | Supported values: female; male; unisex","# Opcional | Color del artículo. Usa una o más palabras para describir el color. No uses un código hexadecimal. Límite de caracteres: 200.","# Opcional | Tamaño o talle del artículo escrito como una palabra; abreviatura o número. Por ejemplo: pequeño; XL o 12. Límite de caracteres: 200.","# Opcional | Grupo de edad al que se dirige el artículo. | Supported values: adult; all ages; infant; kids; newborn; teen; toddler","# Opcional | The material the item is made from; such as cotton; denim or leather. Character limit: 200.","# Opcional | Estampado o impresión gráfica del artículo. Límite de caracteres: 100.","# Opcional | Detalles de envío del artículo; con el siguiente formato: 'País:Región:Servicio:Precio'. Incluye el código de divisa ISO 3 de 3 l4217tras en el precio. Para usar el texto superpuesto 'Envío gratuito' en tus anuncios; ingresa un precio de '0.0'. Usa ';' para separar varios detalles de envío para distintas regiones o países. Solo las personas de una región o país especificado verán los detalles de envío correspondientes a su ubicación. Puedes omitir la región (conserva ambos signos '::') si los detalles de envío son los mismos para todo el país.","# Opcional | Peso del envío del artículo. Incluye la unidad de medida (lb/oz/g/kg).","# Opcional | Describe el estilo del artículo.","# Opcional | Controla si el artículo está activo o archivado en el catálogo. En tus anuncios, tiendas u otros canales, las personas solo pueden ver los artículos activos. Valores admitidos: active (activo) o archived (archivado)."
+id,title,description,availability,condition,price,link,image_link,additional_image_link,brand,google_product_category,fb_product_category,quantity_to_sell_on_facebook,sale_price,sale_price_effective_date,item_group_id,gender,color,size,age_group,material,pattern,shipping,shipping_weight,style,status
+127,"Remeron Sin Mangas Rock The World","Elaborados con algodón rústico pre-lavado de excelente calidad, estos remerones ofrecen una sensación suave y cómoda al tacto, mientras su diseño aporta un toque único y original a tu estilo,
+
+son la elección perfecta para ti !!!","available for order",new,"15,100 ARS",https://mitiendabit.com/tienda/producto/127/remeron-sin-mangas-rock-the-world,https://mitiendabit.com/uploads/1/thumb_1_prod_127_64178114859ce.webp,,MiTiendaBit,212,430,,"12,400 ARS",2023-02-19T00:00-03:00,,Female,"blanco,negro","S,M,L","all ages",algodon,"Rock The World",,,urbano,active
+126,"Remeron Sin Mangas Ramones","Elaborados con algodón rústico prelavado de excelente calidad, estos remeroenes ofrecen una sensación suave y cómoda al tacto, mientras su diseño aporta un toque único y original a tu estilo,
+
+son la elección perfecta para ti !!!","available for order",new,"15,100 ARS",https://mitiendabit.com/tienda/producto/126/remeron-sin-mangas-ramones,https://mitiendabit.com/uploads/1/thumb_1_prod_126_6417809adcef7.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_126_641780b15fdd3.webp,",MiTiendaBit,212,430,,"12,400 ARS",2023-02-19T00:00-03:00,,Female,"blanco,negro","S,M,L","all ages",algodon,Ramones,,,urbano,active
+125,"Remeron Sin Mangas Batik Pink Floyd","Elaborados con algodón rústico prelavado de excelente calidad, estos remeroenes ofrecen una sensación suave y cómoda al tacto, mientras su diseño aporta un toque único y original a tu estilo,
+
+son la elección perfecta para ti !!!","available for order",new,"15,100 ARS",https://mitiendabit.com/tienda/producto/125/remeron-sin-mangas-batik-pink-floyd,https://mitiendabit.com/uploads/1/thumb_1_prod_125_641780601983e.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_125_6417806a9988b.webp,",MiTiendaBit,212,430,,"12,400 ARS",2023-02-19T00:00-03:00,,Female,"blanco,negro","S,M,L","all ages",algodon,"Pink Floyd",,,urbano,active
+124,"Remeron Sin Mangas Batik Guns and Roses","Elaborados con algodón rústico prelavado de excelente calidad, estos remeroenes ofrecen una sensación suave y cómoda al tacto, mientras su diseño aporta un toque único y original a tu estilo,
+
+son la elección perfecta para ti !!!","available for order",new,"15,100 ARS",https://mitiendabit.com/tienda/producto/124/remeron-sin-mangas-batik-guns-and-roses,https://mitiendabit.com/uploads/1/thumb_1_prod_124_64178013bbf0c.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_124_64178024dc4c0.webp,",MiTiendaBit,212,430,,"12,400 ARS",2023-02-19T00:00-03:00,,Female,"blanco,negro","S,M,L","all ages",algodon,"Guns and Roses",,,urbano,active
+123,"Remeron Sin Mangas Batik The Roling Stone","Elaborados con algodón rústico prelavado de excelente calidad, estos remeroenes ofrecen una sensación suave y cómoda al tacto, mientras su diseño aporta un toque único y original a tu estilo,
+
+son la elección perfecta para ti !!!","available for order",new,"15,100 ARS",https://mitiendabit.com/tienda/producto/123/remeron-sin-mangas-batik-the-roling-stone,https://mitiendabit.com/uploads/1/thumb_1_prod_123_64177f2f4de39.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_123_64177f3f5555e.webp,",MiTiendaBit,212,430,,"12,400 ARS",2023-02-19T00:00-03:00,,Female,"blanco,negro","S,M,L","all ages",algodon,"The Roling Stone",,,urbano,active
+122,"Remeron Batik Hey Ho Lets Go","Elaborados con algodón rústico prelavado de excelente calidad, estos remeroenes ofrecen una sensación suave y cómoda al tacto, mientras su diseño aporta un toque único y original a tu estilo,
+
+son la elección perfecta para ti !!!","available for order",new,"15,100 ARS",https://mitiendabit.com/tienda/producto/122/remeron-batik-hey-ho-lets-go,https://mitiendabit.com/uploads/1/thumb_1_prod_122_641778ee6672c.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_122_6417790bb8115.webp,",MiTiendaBit,212,430,,"12,400 ARS",2023-02-19T00:00-03:00,,Female,"blanco,negro","S,M,L","all ages",algodon,"Hey Ho Lets Go",,,urbano,active
+121,"Remeron Batik The Roling Stone","Elaborados con algodón rústico prelavado de excelente calidad, estos remeroenes ofrecen una sensación suave y cómoda al tacto, mientras su diseño aporta un toque único y original a tu estilo,
+
+son la elección perfecta para ti !!!","available for order",new,"15,100 ARS",https://mitiendabit.com/tienda/producto/121/remeron-batik-the-roling-stone,https://mitiendabit.com/uploads/1/thumb_1_prod_121_641778387e7e9.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_121_6417784bf235c.webp,",MiTiendaBit,212,430,,"12,400 ARS",2023-02-19T00:00-03:00,,Female,"blanco,negro","S,M,L","all ages",algodon,"The Roling Stone",,,urbano,active
+120,"Remeron Batik Pink Floyd","Elaborados con algodón rústico prelavado de excelente calidad, estos remeroenes ofrecen una sensación suave y cómoda al tacto, mientras su diseño aporta un toque único y original a tu estilo,
+
+son la elección perfecta para ti !!!","available for order",new,"15,100 ARS",https://mitiendabit.com/tienda/producto/120/remeron-batik-pink-floyd,https://mitiendabit.com/uploads/1/thumb_1_prod_120_6417779d5ae73.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_120_641777e7b60c4.webp,",MiTiendaBit,212,430,,"12,400 ARS",2023-02-19T00:00-03:00,,Female,"blanco,negro","S,M,L","all ages",algodon,"Pink Floyd",,,urbano,active
+119,"Remeron Batik Rebel Soul","Elaborados con algodón rústico prelavado de excelente calidad, estos remeroenes ofrecen una sensación suave y cómoda al tacto, mientras su diseño aporta un toque único y original a tu estilo,
+
+son la elección perfecta para ti !!!","available for order",new,"15,100 ARS",https://mitiendabit.com/tienda/producto/119/remeron-batik-rebel-soul,https://mitiendabit.com/uploads/1/thumb_1_prod_119_6417773f96d6b.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_119_6417774c8a19d.webp,",MiTiendaBit,212,430,,"12,400 ARS",2023-02-19T00:00-03:00,,Female,"blanco,negro","S,M,L","all ages",algodon,"Rebel Soul",,,urbano,active
+118,"Maxibuzos batik LA California","Elaborados con algodón rústico prelavado de excelente calidad, estos maxibuzos ofrecen una sensación suave y cómoda al tacto, mientras su diseño aporta un toque único y original a tu estilo, son la elección perfecta para ti.","in stock",new,"25,900 ARS",https://mitiendabit.com/tienda/producto/118/maxibuzos-batik-la-california,https://mitiendabit.com/uploads/1/thumb_1_prod_118_641773932d21d.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_118_6417739f0e6ed.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_118_641773acba2b0.webp,",MiTiendaBit,5598,454,,"22,200 ARS",2023-02-19T00:00-03:00,,Female,"blanco,negro","S,M,L","all ages","algodon y poliester con friza","LA California",,,urbano,active
+117,"Maxibuzos batik Ramones","Elaborados con algodón rústico prelavado de excelente calidad, estos maxibuzos ofrecen una sensación suave y cómoda al tacto, mientras su diseño aporta un toque único y original a tu estilo, son la elección perfecta para ti.","in stock",new,"25,900 ARS",https://mitiendabit.com/tienda/producto/117/maxibuzos-batik-ramones,https://mitiendabit.com/uploads/1/thumb_1_prod_117_64176bb3d35fe.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_117_6417721fa63e2.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_117_6417722b838fc.webp,",MiTiendaBit,5598,454,,"22,200 ARS",2023-02-19T00:00-03:00,,Female,"blanco,negro","S,M,L","all ages","algodon y poliester con friza",Ramones,,,urbano,active
+116,"Maxibuzos batik Coverse All Stars","Elaborados con algodón rústico prelavado de excelente calidad, estos maxibuzos ofrecen una sensación suave y cómoda al tacto, mientras su diseño aporta un toque único y original a tu estilo, son la elección perfecta para ti.","in stock",new,"25,900 ARS",https://mitiendabit.com/tienda/producto/116/maxibuzos-batik-coverse-all-stars,https://mitiendabit.com/uploads/1/thumb_1_prod_116_64176e5ef15a2.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_116_641772832d7a7.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_116_6417729665884.webp,",MiTiendaBit,5598,454,,"22,200 ARS",2023-02-19T00:00-03:00,,Female,"blanco,negro","S,M,L","all ages","algodon y poliester con friza","Coverse All Stars",,,urbano,active
+115,"Maxibuzo batik Rock The World","Elaborados con algodón rústico prelavado de excelente calidad, estos maxibuzos ofrecen una sensación suave y cómoda al tacto, mientras su diseño aporta un toque único y original a tu estilo, son la elección perfecta para ti.","in stock",new,"25,900 ARS",https://mitiendabit.com/tienda/producto/115/maxibuzo-batik-rock-the-world,https://mitiendabit.com/uploads/1/thumb_1_prod_115_64176e80429ad.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_115_641772b27138c.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_115_641772c81554e.webp,",MiTiendaBit,5598,454,,"22,200 ARS",2023-02-19T00:00-03:00,,Female,"blanco,negro","S,M,L","all ages","algodon y poliester con friza","Rock The World",,,urbano,active
+114,"Remera Drew Face","100% algodón garantizan un tacto suave, de calidad y con buen look.","in stock",new,"10,500 ARS",https://mitiendabit.com/tienda/producto/114/remera-drew-face,https://mitiendabit.com/uploads/1/thumb_1_prod_114_6402c88bbfd6f.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_114_6402c8a9b7f45.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_114_6402c8c1bee84.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_114_6402c8df27fe1.webp",MiTiendaBit,212,459,,,,,Male,"blanco,negro","S,M,L","all ages",algodon,"Drew Face",,,urbano,active
+113,"Remera Reader Generation Tokyo Japan","100% algodón garantizan un tacto suave, de calidad y con buen look.","in stock",new,"10,500 ARS",https://mitiendabit.com/tienda/producto/113/remera-reader-generation-tokyo-japan,https://mitiendabit.com/uploads/1/thumb_1_prod_113_6402b92b342ad.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_113_6402b945d6995.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_113_6402b95d57e8a.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_113_6402b97c07e9f.webp",MiTiendaBit,212,459,,,,,Male,"blanco,negro","S,M,L","all ages",algodon,"Generation Tokyo Japan",,,urbano,active
+112,"Remera Aliens No Veo Oigo Hablo","100% algodón garantizan un tacto suave, de calidad y con buen look.","in stock",new,"10,500 ARS",https://mitiendabit.com/tienda/producto/112/remera-aliens-no-veo-oigo-hablo,https://mitiendabit.com/uploads/1/thumb_1_prod_112_6402b22d966ab.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_112_6402b259e1e47.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_112_6402b299750f3.webp,",MiTiendaBit,212,459,,,,,Male,"blanco,negro","S,M,L","all ages",algodon,"Aliens No Veo Oigo Hablo",,,urbano,active
+111,"Remera Dark Cat","100% algodón garantizan un tacto suave, de calidad y con buen look.","in stock",new,"10,500 ARS",https://mitiendabit.com/tienda/producto/111/remera-dark-cat,https://mitiendabit.com/uploads/1/thumb_1_prod_111_6402ac0cd0be7.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_111_6402ac2e148fe.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_111_6402ac40d7967.webp,",MiTiendaBit,212,459,,,,,Male,"blanco,negro","S,M,L","all ages",algodon,"Dark Cat",,,urbano,active
+110,"Remera Slow Living","100% algodón garantizan un tacto suave, de calidad y con buen look.","in stock",new,"10,500 ARS",https://mitiendabit.com/tienda/producto/110/remera-slow-living,https://mitiendabit.com/uploads/1/thumb_1_prod_110_64029e156a281.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_110_64029e3ad0813.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_110_64029e4817dc4.webp,",MiTiendaBit,212,459,,,,,Male,"blanco,negro","S,M,L","all ages",algodon,"Slow Living",,,urbano,active
+109,"Remera Only Good Vibes","100% algodón garantizan un tacto suave, de calidad y con buen look.","in stock",new,"10,500 ARS",https://mitiendabit.com/tienda/producto/109/remera-only-good-vibes,https://mitiendabit.com/uploads/1/thumb_1_prod_109_640299d1da16a.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_109_640299e802bde.webp,",MiTiendaBit,212,459,,,,,Male,"blanco,negro","S,M,L","all ages",algodon,"Only Good Vibes",,,urbano,active
+108,"Remera Nicce London","100% algodón garantizan un tacto suave, de calidad y con buen look.","in stock",new,"10,500 ARS",https://mitiendabit.com/tienda/producto/108/remera-nicce-london,https://mitiendabit.com/uploads/1/thumb_1_prod_108_6402938b235f3.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_108_640293f9a9255.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_108_6402941ed9973.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_108_6402943860762.webp",MiTiendaBit,212,459,,,,,Male,"blanco,negro","S,M,L","all ages",algodon,,,,urbano,active
+107,"Remera Be a Nice Human","100% algodón garantizan un tacto suave, de calidad y con buen look.","in stock",new,"10,500 ARS",https://mitiendabit.com/tienda/producto/107/remera-be-a-nice-human,https://mitiendabit.com/uploads/1/thumb_1_prod_107_6402886a338f9.webp,,MiTiendaBit,212,459,,,,,Male,"blanco,negro","S,M,L","all ages",algodon,,,,urbano,active
+106,"Buzo Los Angeles H","Nuestros buzos están confeccionados con algodón frisado, lo que garantiza su suavidad y comodidad.
+
+Para el estampado utilizamos vinilo premium, lo que asegura que el diseño se mantendrá nítido y brillante durante mucho tiempo.","in stock",new,"21,300 ARS",https://mitiendabit.com/tienda/producto/106/buzo-los-angeles-h,https://mitiendabit.com/uploads/1/thumb_1_prod_106_63fe12f36f4c5.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_106_63fe130aaefc6.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_106_63fe1328c5960.webp,",MiTiendaBit,212,459,,,,,Male,"blanco,negro","1,2,3","all ages",algodon,,,,urbano,active
+105,"Buzo Natural","Nuestros buzos están confeccionados con algodón frisado, lo que garantiza su suavidad y comodidad.
+
+Para el estampado utilizamos vinilo premium, lo que asegura que el diseño se mantendrá nítido y brillante durante mucho tiempo.
+
+Talles : 1 - 2 - 3","in stock",new,"21,300 ARS",https://mitiendabit.com/tienda/producto/105/buzo-natural,https://mitiendabit.com/uploads/1/thumb_1_prod_105_63fd6d70782f7.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_105_63fd6ddea346e.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_105_63fd7035cfe0e.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_105_63fd716eebd4b.webp",MiTiendaBit,5598,454,,,,,Female,"blanco,negro","S,M,L","all ages","algodon y poliester con friza",,,,urbano,active
+104,"Buzo Vancouver Est 1886 British Columbia","Nuestros buzos están confeccionados con algodón frisado, lo que garantiza su suavidad y comodidad.
+
+Para el estampado utilizamos vinilo premium, lo que asegura que el diseño se mantendrá nítido y brillante durante mucho tiempo.
+
+Talles : 1 - 2 - 3","in stock",new,"21,300 ARS",https://mitiendabit.com/tienda/producto/104/buzo-vancouver-est-1886-british-columbia,https://mitiendabit.com/uploads/1/thumb_1_prod_104_63fc352483586.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_104_63fc355a91cd6.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_104_63fc35d9ea43b.webp,",MiTiendaBit,5598,454,,,,,Female,"blanco,negro","S,M,L","all ages","algodon y poliester con friza",,,,urbano,active
+102,"Buzo Yes Boss","Nuestros buzos están confeccionados con algodón frisado, lo que garantiza su suavidad y comodidad.
+
+Para el estampado utilizamos vinilo premium, lo que asegura que el diseño se mantendrá nítido y brillante durante mucho tiempo.
+
+Talles : 1 - 2 - 3","in stock",new,"21,300 ARS",https://mitiendabit.com/tienda/producto/102/buzo-yes-boss,https://mitiendabit.com/uploads/1/thumb_1_prod_102_63fbdeb21adb1.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_102_63fbdeec8ece6.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_102_63fbdf99b5a56.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_102_63fbdfabf26f4.webp",MiTiendaBit,5598,454,,,,,Female,"blanco,negro","S,M,L","all ages","algodon y poliester con friza",,,,urbano,active
+101,"Buzo Pleasing","Nuestros buzos están confeccionados con algodón frisado, lo que garantiza su suavidad y comodidad.
+
+Para el estampado utilizamos vinilo premium, lo que asegura que el diseño se mantendrá nítido y brillante durante mucho tiempo.
+
+Talles : 1 - 2 - 3","in stock",new,"21,300 ARS",https://mitiendabit.com/tienda/producto/101/buzo-pleasing,https://mitiendabit.com/uploads/1/thumb_1_prod_101_63fbaf14b1f46.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_101_63fbaf28cfe01.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_101_63fbaf3a1da15.webp,",MiTiendaBit,5598,454,,,,,Female,"blanco,negro","S,M,L","all ages","algodon y poliester con friza",,,,urbano,active
+100,"Buzo New York USA","Nuestros buzos están confeccionados con algodón frisado, lo que garantiza su suavidad y comodidad.
+
+Para el estampado utilizamos vinilo premium, lo que asegura que el diseño se mantendrá nítido y brillante durante mucho tiempo.
+
+Talles : 1 - 2 - 3","in stock",new,"21,300 ARS",https://mitiendabit.com/tienda/producto/100/buzo-new-york-usa,https://mitiendabit.com/uploads/1/thumb_1_prod_100_63fba560eb8a7.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_100_63fba58404d42.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_100_63fba5c3ab983.webp,",MiTiendaBit,5598,454,,,,,Female,"blanco,negro","S,M,L","all ages","algodon y poliester con friza",,,,urbano,active
+99,"Buzo Hogwarts Quidditch","Nuestros buzos están confeccionados con algodón frisado, lo que garantiza su suavidad y comodidad.
+
+Para el estampado utilizamos vinilo premium, lo que asegura que el diseño se mantendrá nítido y brillante durante mucho tiempo.
+
+Talles : 1 - 2 - 3","in stock",new,"21,300 ARS",https://mitiendabit.com/tienda/producto/99/buzo-hogwarts-quidditch,https://mitiendabit.com/uploads/1/thumb_1_prod_99_63fb97130f94f.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_99_63fb9729a0b8f.webp,",MiTiendaBit,5598,454,,,,,Female,"blanco,negro","S,M,L","all ages","algodon y poliester con friza",,,,urbano,active
+98,"Buzo Wellness","Nuestros buzos están confeccionados con algodón frisado, lo que garantiza su suavidad y comodidad.
+
+Para el estampado utilizamos vinilo premium, lo que asegura que el diseño se mantendrá nítido y brillante durante mucho tiempo.
+
+Talles : 1 - 2 - 3","in stock",new,"21,300 ARS",https://mitiendabit.com/tienda/producto/98/buzo-wellness,https://mitiendabit.com/uploads/1/thumb_1_prod_98_63fb769d323ff.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_98_63fb86910ed09.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_98_63fb88631aed6.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_98_63fb891688200.webp",MiTiendaBit,5598,454,,,,,Female,"blanco,negro","S,M,L","all ages","algodon y poliester con friza",,,,urbano,active
+97,"Buzo Yves Saint Laurent","Nuestros buzos están confeccionados con algodón frisado, lo que garantiza su suavidad y comodidad.
+
+Para el estampado utilizamos vinilo premium, lo que asegura que el diseño se mantendrá nítido y brillante durante mucho tiempo.
+
+Talles : 1 - 2 - 3","in stock",new,"21,300 ARS",https://mitiendabit.com/tienda/producto/97/buzo-yves-saint-laurent,https://mitiendabit.com/uploads/1/thumb_1_prod_97_63fa9498dc849.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_97_63fa94b7674cd.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_97_63fa94d792cc9.webp,",MiTiendaBit,5598,454,,,,,Female,"blanco,negro","S,M,L","all ages","algodon y poliester con friza",,,,urbano,active
+96,"Remera Princesa Morley","Confeccionada en morley es una opción cómoda y versátil.
+
+Con cuello redondo y manga corta, es perfecta para lucir en ocasiones casuales o para salir de noche.
+
+Su diseño elegante y femenino la hace ideal para combinar con distintos outfits.","available for order",new,"11,700 ARS",https://mitiendabit.com/tienda/producto/96/remera-princesa-morley,https://mitiendabit.com/uploads/1/thumb_1_prod_96_63fa1cc64bd1a.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_96_63fa1cd9ac71d.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_96_63fa1cfd23963.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_96_63fa1d10d5c7f.webp",MiTiendaBit,212,430,,,,,Female,"blanco,negro","S,M,L","all ages",algodon,,,,urbano,active
+95,"Buzo New York Soho","Nuestros buzos están confeccionados con algodón frisado, lo que garantiza su suavidad y comodidad.
+
+Para el estampado utilizamos vinilo premium, lo que asegura que el diseño se mantendrá nítido y brillante durante mucho tiempo.
+
+Talles : 1 - 2 - 3","in stock",new,"21,300 ARS",https://mitiendabit.com/tienda/producto/95/buzo-new-york-soho,https://mitiendabit.com/uploads/1/thumb_1_prod_95_63f6dca780bf2.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_95_63f6dcd37d695.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_95_63f6dcf2a6a28.webp,",MiTiendaBit,5598,454,,,,,Female,"blanco,negro","S,M,L","all ages","algodon y poliester con friza",,,,urbano,active
+94,"Buzo Love","Nuestros buzos están confeccionados con algodón frisado, lo que garantiza su suavidad y comodidad.
+
+Para el estampado utilizamos vinilo premium, lo que asegura que el diseño se mantendrá nítido y brillante durante mucho tiempo.
+
+Talles : 1 - 2 - 3","in stock",new,"21,300 ARS",https://mitiendabit.com/tienda/producto/94/buzo-love,https://mitiendabit.com/uploads/1/thumb_1_prod_94_63f6da696c927.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_94_63f6daddd5b65.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_94_63f6dc1eb259d.webp,",MiTiendaBit,5598,454,,,,,Female,"blanco,negro","S,M,L","all ages","algodon y poliester con friza",,,,urbano,active
+93,"Buzo Good Energy Club","Nuestros buzos están confeccionados con algodón frisado, lo que garantiza su suavidad y comodidad.
+
+Para el estampado utilizamos vinilo premium, lo que asegura que el diseño se mantendrá nítido y brillante durante mucho tiempo.
+
+Talles : 1 - 2 - 3","in stock",new,"21,300 ARS",https://mitiendabit.com/tienda/producto/93/buzo-good-energy-club,https://mitiendabit.com/uploads/1/thumb_1_prod_93_63f6d940b8fc3.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_93_63f6d967ed646.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_93_63f6d9a80ba7e.webp,",MiTiendaBit,5598,454,,,,,Female,"blanco,negro","S,M,L","all ages","algodon y poliester con friza",,,,urbano,active
+92,"Buzo California West Coast","Nuestros buzos están confeccionados con algodón frisado, lo que garantiza su suavidad y comodidad.
+
+Para el estampado utilizamos vinilo premium, lo que asegura que el diseño se mantendrá nítido y brillante durante mucho tiempo.
+
+Talles : 1 - 2 - 3","in stock",new,"21,300 ARS",https://mitiendabit.com/tienda/producto/92/buzo-california-west-coast,https://mitiendabit.com/uploads/1/thumb_1_prod_92_63f5998f86ce8.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_92_63f599bd5d90c.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_92_63f59a474c95f.webp,",MiTiendaBit,5598,454,,,,,Female,"blanco,negro","S,M,L","all ages","algodon y poliester con friza",,,,urbano,active
+91,"Buzo Paranoia","Nuestros buzos están confeccionados con algodón frisado, lo que garantiza su suavidad y comodidad.
+
+Para el estampado utilizamos vinilo premium, lo que asegura que el diseño se mantendrá nítido y brillante durante mucho tiempo.
+
+Talles : 1 - 2 - 3","in stock",new,"21,300 ARS",https://mitiendabit.com/tienda/producto/91/buzo-paranoia,https://mitiendabit.com/uploads/1/thumb_1_prod_91_63f57e284d98e.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_91_63f57e62a2b74.webp,",MiTiendaBit,5598,454,,,,,Female,"blanco,negro","S,M,L","all ages","algodon y poliester con friza",,,,urbano,active
+90,"Buzo de friza","Nuestros buzos están confeccionados con algodón frisado, lo que garantiza su suavidad y comodidad.
+
+Para el estampado utilizamos vinilo premium, lo que asegura que el diseño se mantendrá nítido y brillante durante mucho tiempo.
+
+Talles : 1 - 2 - 3","in stock",new,"21,300 ARS",https://mitiendabit.com/tienda/producto/90/buzo-de-friza,https://mitiendabit.com/uploads/1/thumb_1_prod_90_63f5063670bee.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_90_63f506a777f97.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_90_63f5076ec85cb.webp,",MiTiendaBit,5598,454,,,,,Female,"blanco,negro","S,M,L","all ages","algodon y poliester con friza",,,,urbano,active
+89,"Buzo Los Angeles","Nuestros buzos están confeccionados con algodón frisado, lo que garantiza su suavidad y comodidad.
+
+Para el estampado utilizamos vinilo premium, lo que asegura que el diseño se mantendrá nítido y brillante durante mucho tiempo.
+
+Talles : 1 - 2 - 3","in stock",new,"21,300 ARS",https://mitiendabit.com/tienda/producto/89/buzo-los-angeles,https://mitiendabit.com/uploads/1/thumb_1_prod_89_63f5004550449.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_89_63f5005d0f043.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_89_63f500a04a908.webp,",MiTiendaBit,5598,454,,,,,Female,"blanco,negro","S,M,L","all ages","algodon y poliester con friza",,,,urbano,active
+88,"Remerones Batik Caracol","Elaborados con algodón prelavado, estos remeroenes ofrecen una sensación suave y cómoda al tacto, mientras su diseño aporta un toque único y original a tu estilo,
+
+son la elección perfecta para ti !!!","available for order",new,"15,100 ARS",https://mitiendabit.com/tienda/producto/88/remerones-batik-caracol,https://mitiendabit.com/uploads/1/thumb_1_prod_88_63f2d684955e5.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_88_63f2d69e444ea.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_88_63f2d6b1a4420.webp,",MiTiendaBit,212,430,,"12,400 ARS",2023-02-19T00:00-03:00,,Female,"blanco,negro","S,M,L","all ages",algodon,,,,urbano,active
+87,"Remerones sin mangas","Elaborados con algodón rústico prelavado de excelente calidad, estos remeroenes ofrecen una sensación suave y cómoda al tacto, mientras su diseño aporta un toque único y original a tu estilo,
+
+son la elección perfecta para ti !!!","available for order",new,"15,100 ARS",https://mitiendabit.com/tienda/producto/87/remerones-sin-mangas,https://mitiendabit.com/uploads/1/thumb_1_prod_87_63f2c0d9ddbb8.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_87_63f2c1287c2b0.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_87_63f2c8cf70080.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_87_63f2ca46a5248.webp",MiTiendaBit,212,430,,"12,400 ARS",2023-02-19T00:00-03:00,,Female,"blanco,negro","S,M,L","all ages",algodon,,,,urbano,active
+86,"Maxibuzo Clasico de Frisa Bob Esponja","Buzos de Dama Con Capucha y Bolsillos.
+
+Elaborado con algodón ofrecen una sensación suave y cómoda al tacto, mientras su diseño aporta un toque único y original a tu estilo.","in stock",new,"26,200 ARS",https://mitiendabit.com/tienda/producto/86/maxibuzo-clasico-de-frisa-bob-esponja,https://mitiendabit.com/uploads/1/thumb_1_prod_86_63f2715adab33.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_86_63f272d98617c.webp,",MiTiendaBit,5598,454,,"22,200 ARS",2023-02-19T00:00-03:00,,Female,"blanco,negro","S,M,L","all ages","algodon y poliester con friza",,,,urbano,active
+85,"Maxibuzo Clasico de Frisa Mickey Negro","Buzos de Dama Con Capucha y Bolsillos.
+
+Elaborado con algodón ofrecen una sensación suave y cómoda al tacto, mientras su diseño aporta un toque único y original a tu estilo.","in stock",new,"26,200 ARS",https://mitiendabit.com/tienda/producto/85/maxibuzo-clasico-de-frisa-mickey-negro,https://mitiendabit.com/uploads/1/thumb_1_prod_85_63f269979c495.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_85_63f269b93dffe.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_85_63f269da524b5.webp,",MiTiendaBit,5598,454,,"22,200 ARS",2023-02-19T00:00-03:00,,Female,"blanco,negro","S,M,L","all ages","algodon y poliester con friza",,,,urbano,active
+84,"Maxibuzo Clasico de Frisa La Sirenita Ariel","Buzos de Dama Con Capucha y Bolsillos.
+
+Elaborado con algodón ofrecen una sensación suave y cómoda al tacto, mientras su diseño aporta un toque único y original a tu estilo.","in stock",new,"26,200 ARS",https://mitiendabit.com/tienda/producto/84/maxibuzo-clasico-de-frisa-la-sirenita-ariel,https://mitiendabit.com/uploads/1/thumb_1_prod_84_63f262c620b5c.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_84_63f262f4a6fbc.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_84_63f2632c1ef8d.webp,",MiTiendaBit,5598,454,,"22,200 ARS",2023-02-19T00:00-03:00,,Female,"blanco,negro","S,M,L","all ages","algodon y poliester con friza",,,,urbano,active
+83,"Remeron Batik Guns and Roses","Elaborados con algodón rústico prelavado de excelente calidad, estos remeroenes ofrecen una sensación suave y cómoda al tacto, mientras su diseño aporta un toque único y original a tu estilo,
+
+son la elección perfecta para ti !!!","available for order",new,"15,100 ARS",https://mitiendabit.com/tienda/producto/83/remeron-batik-guns-and-roses,https://mitiendabit.com/uploads/1/thumb_1_prod_83_63f252f6334b9.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_83_63f2530a75ea4.webp,",MiTiendaBit,212,430,,"12,400 ARS",2023-02-19T00:00-03:00,,Female,"blanco,negro","S,M,L","all ages",algodon,,,,urbano,active
+82,"Maxibuzo Clasico de Frisa Gato Silvestre","Buzos de Dama Con Capucha y Bolsillos.
+
+Elaborado con algodón ofrecen una sensación suave y cómoda al tacto, mientras su diseño aporta un toque único y original a tu estilo.","in stock",new,"26,200 ARS",https://mitiendabit.com/tienda/producto/82/maxibuzo-clasico-de-frisa-gato-silvestre,https://mitiendabit.com/uploads/1/thumb_1_prod_82_63f24965041e6.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_82_63f2497ab8586.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_82_63f249a5a495b.webp,",MiTiendaBit,5598,454,,"22,200 ARS",2023-02-19T00:00-03:00,,Female,"blanco,negro","S,M,L","all ages","algodon y poliester con friza",,,,urbano,active
+81,"Maxibuzo Clasico Gato de Cheshire","Buzos de Dama Con Capucha y Bolsillos.
+
+Elaborado con algodón ofrecen una sensación suave y cómoda al tacto, mientras su diseño aporta un toque único y original a tu estilo.","in stock",new,"26,200 ARS",https://mitiendabit.com/tienda/producto/81/maxibuzo-clasico-gato-de-cheshire,https://mitiendabit.com/uploads/1/thumb_1_prod_81_63f242031a948.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_81_63f24257e0561.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_81_63f2427a5549a.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_81_63f2428b51ae9.webp",MiTiendaBit,5598,454,,"22,200 ARS",2023-02-19T00:00-03:00,,Female,"blanco,negro","S,M,L","all ages","algodon y poliester con friza",,,,urbano,active
+80,"Maxibuzos batik The Rolling Stones","Elaborados con algodón rústico prelavado de excelente calidad, estos maxibuzos ofrecen una sensación suave y cómoda al tacto, mientras su diseño aporta un toque único y original a tu estilo, son la elección perfecta para ti.","in stock",new,"25,900 ARS",https://mitiendabit.com/tienda/producto/80/maxibuzos-batik-the-rolling-stones,https://mitiendabit.com/uploads/1/thumb_1_prod_80_6417733180904.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_80_6417733ff1993.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_80_6417734f2350b.webp,",MiTiendaBit,5598,454,,"22,200 ARS",2023-02-19T00:00-03:00,,Female,"blanco,negro","S,M,L","all ages","algodon y poliester con friza",,,,urbano,active
+79,"Calza Negra Deportiva y Cintura Ancha ","Calza deportiva con costura de seguridad! Confeccionada en Lycra suave y flexible, esta calza cuenta con una cintura ancha para mayor comodidad y un acabado liso en negro que se adapta a cualquier outfit deportivo.
+
+talles del 1 al 6","in stock",new,"11,500 ARS",https://mitiendabit.com/tienda/producto/79/calza-negra-deportiva-y-cintura-ancha,https://mitiendabit.com/uploads/1/thumb_1_prod_79_63eb5e704908d.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_79_63eb5e8ef30ab.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_79_63eb5ee4513e6.webp,",MiTiendaBit,212,535,,"9,800 ARS",2023-02-13T00:00-03:00,,Female,"blanco,negro","S,M,L","all ages","microfibra con lycra",,,,"urbano, sport",active
+78,"Sueter Bremer Morley Viscosa","Suéter perfecto para otoño/invierno!
+
+Elaborado en Morley Viscosa, un material suave y cómodo que te mantendrá abrigado en los días frescos.
+
+Su cuello redondo permite adaptarse a un estilo formal o informal y es la elección perfecta para complementar cualquier atuendo, ya sea para ir al trabajo o para una salida casual.
+
+Talles disponibles desde 1 hasta 5","in stock",new,"19,000 ARS",https://mitiendabit.com/tienda/producto/78/sueter-bremer-morley-viscosa,https://mitiendabit.com/uploads/1/thumb_1_prod_78_63ea699f0931e.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_78_63ea69b81eba8.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_78_63ea69d7a9749.webp,",MiTiendaBit,212,459,,,,,Male,"blanco,negro","S,M,L","all ages",algodon,,,,urbano,active
+76,"Vestido Manga corta Morley con Frunce a los Costados","Cómodo vestido con un estilo informal ideal para verano.
+
+Confeccionado en morley elastizado, ceñido al cuerpo, de manga corta, cuello redondo, escote cubierto y con tiras frunce laterales.","in stock",new,"16,400 ARS",https://mitiendabit.com/tienda/producto/76/vestido-manga-corta-morley-con-frunce-a-los-costados,https://mitiendabit.com/uploads/1/thumb_1_prod_76_639620a93e338.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_76_639621070fa0c.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_76_63962129b0273.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_76_63962c5bd9614.webp",MiTiendaBit,2271,443,,"14,800 ARS",2022-12-29T00:00-03:00,,Female,"Blanco, Negro , Gris (claro y oscuro).  Rosa , Rojo, Salmón, Verde militar, Verde Natural.","2,3,4,5","all ages",algodon,,,,urbano,active
+75,"Bermuda Mom Azul con Roturas y Flequillos","Bermuda de jeans con efecto de rotura y flequillos, perfecto para actividades diarias.
+
+Versátiles y fáciles de combinar, las bermudas de jeans desvelan infinitas combinaciones posibles, para el hombre de mil facetas que ama llevar ropa siempre diferente. Ideal para combinar con un sinfín de ítems al estilo streetwear o urbano informal.","in stock",new,"19,800 ARS",https://mitiendabit.com/tienda/producto/75/bermuda-mom-azul-con-roturas-y-flequillos,https://mitiendabit.com/uploads/1/thumb_1_prod_75_63960957ebdcf.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_75_63960998aa862.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_75_639609cbd6392.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_75_639609e67943a.webp",MiTiendaBit,166,455,,,,,Male,"blanco,negro","S,M,L","all ages",algodon,,,,urbano,active
+74,"Vestido Manga Larga Morley con Frunce a los Costados","Vestido manga larga de morley elastizado con tiras frunce laterales y cuello 1/2 polera.
+
+Talles 2 al 5
+Gris claro y oscuro
+verde militar . Rosa viejo y negro","in stock",new,"15,600 ARS",https://mitiendabit.com/tienda/producto/74/vestido-manga-larga-morley-con-frunce-a-los-costados,https://mitiendabit.com/uploads/1/thumb_1_prod_74_6395d87a28866.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_74_6395d8cba9305.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_74_6395d90440758.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_74_63a9edef45c1a.webp",MiTiendaBit,2271,443,,"13,600 ARS",2025-03-03T00:00-03:00,,Female,"blanco,negro","S,M,L","all ages",algodon,,,,urbano,active
+73,"Vestido manga corta con bolsillo","Cómodo vestido de algodón ajustado en la zona superior y suelto en la zona inferior lo que le da un estilo fresco y con libertad de movimiento
+
+Talle único
+sede asta un talle 3 - 4","in stock",new,"11,700 ARS",https://mitiendabit.com/tienda/producto/73/vestido-manga-corta-con-bolsillo,https://mitiendabit.com/uploads/1/thumb_1_prod_73_6395497b538c3.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_73_6395499e6f30f.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_73_639549b8be18f.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_73_639549d256038.webp",MiTiendaBit,2271,443,,,,,Female,"blanco,negro","S,M,L","all ages",algodon,,,,urbano,active
+72,"Remera Clasica De Mujer con Botones en Escote","Las remeras de siempre que van bien con todo!!
+
+Remera Básica con Botones en escote
+
+Material: Modal Viscosa
+
+Talle único
+
+MEDIDAS
+- Ancho (Sisa a Sisa): 38cm
+- Largo: 53cm
+- Mangas: 10cm","available for order",new,"11,700 ARS",https://mitiendabit.com/tienda/producto/72/remera-clasica-de-mujer-con-botones-en-escote,https://mitiendabit.com/uploads/1/thumb_1_prod_72_639538a8cfdd7.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_72_639538c7cbd1c.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_72_639538db58a7f.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_72_639538eed01ad.webp",MiTiendaBit,212,430,,,,,Female,"blanco,negro","S,M,L","all ages",algodon,,,,urbano,active
+71,"Remera de modal viscosa con escote V y puntilla vane","Esta remera con escote en V es un clásico que nunca pasará de moda.
+
+Está confeccionada en modal viscosa y cuenta con un detalle de puntilla que la hace destacar.
+
+Es una opción perfecta tanto para eventos formales como informales, por lo que se convierte en una prenda imprescindible en cualquier guardarropa.","available for order",new,"11,700 ARS",https://mitiendabit.com/tienda/producto/71/remera-de-modal-viscosa-con-escote-v-y-puntilla-vane,https://mitiendabit.com/uploads/1/thumb_1_prod_71_6394eab01e15d.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_71_6394eabf2d60d.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_71_6394eace78110.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_71_6394eadf043ce.webp",MiTiendaBit,212,430,,,,,Female,"blanco,negro","S,M,L","all ages",algodon,,,,urbano,active
+70,"Bikers de Lycra tiro alto y faja ancha","Calzas biker sublimadas a la cintura y de tiro alto
+
+Talle 1 al 5 (38; 40; 42; 44; 46)
+
+Consultar disponibilidad de talle y diseño antes de realizar la compra.","in stock",new,"11,700 ARS",https://mitiendabit.com/tienda/producto/70/bikers-de-lycra-tiro-alto-y-faja-ancha,https://mitiendabit.com/uploads/1/thumb_1_prod_70_6394ddd83c1c7.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_70_6394dde649233.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_70_6394ddf609b73.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_70_6394de0753ac5.webp",MiTiendaBit,166,455,,,,,Female,"blanco,negro","S,M,L","all ages",algodon,,,,urbano,active
+69,"Mono enterito largo de Morley Viscosa","Mono prenda con bolsillos grandes
+
+Tela: Morley viscosa con lycra
+
+Talle 2_4_6","in stock",new,"22,900 ARS",https://mitiendabit.com/tienda/producto/69/mono-enterito-largo-de-morley-viscosa,https://mitiendabit.com/uploads/1/thumb_1_prod_69_6394d235a1ada.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_69_6394d2553f342.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_69_6394d26c997a7.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_69_6394d27990230.webp",MiTiendaBit,2271,443,,"19,700 ARS",2025-03-03T00:00-03:00,,Female,"blanco,negro","S,M,L","all ages",algodon,,,,urbano,active
+68,"Short de bano liso para Cabelleros","Short de baño liso
+
+Talles del 1 al 6","in stock",new,"9,800 ARS",https://mitiendabit.com/tienda/producto/68/short-de-bano-liso-para-cabelleros,https://mitiendabit.com/uploads/1/thumb_1_prod_68_6378e3bd3749f.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_68_6378e3d08b2ef.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_68_6378e65166f5b.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_68_6378e6783b88e.webp",MiTiendaBit,166,455,,,,,Male,"blanco,negro","S,M,L","all ages",algodon,,,,urbano,active
+67,"Pantalon Cargo de Bengalina Elastizada para Damas","Diseñado para damas y confeccionado en Gabardina elastizada cuenta con cintura elastica con nudo para mayor ajuste y comodidad, demas de los tradicionales bolsillos traseros y delanteros tiene unos practicos bolsillos laterales con solapa, ideal para actividades cotidianas. El puño en el tobillo lo hace perfectos para combinar y lucir tus zapatillas favoritas.
+
+Es simplemente perefecto para complementar cualquier look urbano informal o estilo streetwear.
+
+Consultar por talles y colores disponibles","in stock",new,"23,500 ARS",https://mitiendabit.com/tienda/producto/67/pantalon-cargo-de-bengalina-elastizada-para-damas,https://mitiendabit.com/uploads/1/thumb_1_prod_67_6378d7ba5bfb0.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_67_6378d7c82c795.webp,",MiTiendaBit,166,455,,,,,Female,"blanco,negro","S,M,L","all ages",algodon,,,,urbano,active
+66,"Vestido Camisero Manga Larga","Amplio y Comodo vestido manga larga con botones al frente
+
+Colores disponibles: Negro, Verde Militar, Blanco, Naranja Camel, Marron habano, Amarillo claro","in stock",new,"25,300 ARS",https://mitiendabit.com/tienda/producto/66/vestido-camisero-manga-larga,https://mitiendabit.com/uploads/1/thumb_1_prod_66_637838825c2c7.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_66_637838b4aebc8.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_66_637838e77f876.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_66_637839117b933.webp",MiTiendaBit,2271,443,,,,,Female,"blanco,negro","S,M,L","all ages",algodon,,,,urbano,active
+65,"Vestido lycra espalda descubierta","Fresco Vestido veraniego confeccionado en lycra con escote y espalda descubierta","in stock",new,"20,900 ARS",https://mitiendabit.com/tienda/producto/65/vestido-lycra-espalda-descubierta,https://mitiendabit.com/uploads/1/thumb_1_prod_65_63744c1528596.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_65_63744c4672d75.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_65_63744c60a366f.webp,",MiTiendaBit,2271,443,,,,,Female,"blanco,negro","S,M,L","all ages",algodon,,,,urbano,active
+64,"Vestido Lentejuelas Opacas","Fresco vestido de noche, confeccionado en lentejuelas opacas. escotado y con espalda descubierta","in stock",new,"34,300 ARS",https://mitiendabit.com/tienda/producto/64/vestido-lentejuelas-opacas,https://mitiendabit.com/uploads/1/thumb_1_prod_64_63743c3f94844.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_64_63743c5954957.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_64_63743c74c2299.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_64_63743c8a54a6c.webp",Mandala,2271,443,,,,,Female,"blanco,negro","S,M,L","all ages",algodon,,,,urbano,active
+63,"Remera Modal Distorcion","Más que una prenda
+¡Refleja quien eres 😉!
+
+Linda frase que llevaras contigo. Con regular fit y el buen material de 100% algodón garantizan un t-shirt de tacto suave, de calidad y con buen look.","in stock",new,"10,500 ARS",https://mitiendabit.com/tienda/producto/63/remera-modal-distorcion,https://mitiendabit.com/uploads/1/thumb_1_prod_63_640079f31f9bb.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_63_64007a87e0794.webp,",MiTiendaBit,212,459,,,,,Male,"blanco,negro","S,M,L","all ages",algodon,,,,urbano,active
+62,"Top Mil Usos","Top de tira de modal de lycra, se puede usar de diversas maneras.","available for order",new,"17,600 ARS",https://mitiendabit.com/tienda/producto/62/top-mil-usos,https://mitiendabit.com/uploads/1/thumb_1_prod_62_637380195100c.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_62_6373808187de0.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_62_637380b19897a.webp,",MiTiendaBit,212,430,,,,,Female,"blanco,negro","S,M,L","all ages",algodon,,,,urbano,active
+61,"Remeron estampado hombros caidos","Remerón veraniego de corte holgado con divertido estampado oriental, estilo urbano de hombros caídos para mujer
+ideal para salidas informales o dia en el hogar.","available for order",new,"14,600 ARS",https://mitiendabit.com/tienda/producto/61/remeron-estampado-hombros-caidos,https://mitiendabit.com/uploads/1/thumb_1_prod_61_636d936985558.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_61_636d939369637.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_61_636d93a574df1.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_61_636d93c1c40f1.webp",MiTiendaBit,212,430,,,,,Female,"blanco,negro","S,M,L","all ages",algodon,,,,urbano,active
+59,"Remeras lisas de algodon de Hombre","Remeras lisas de algodón
+
+• Talles del 1 al 5
+
+• Colores varios","in stock",new,"17,100 ARS",https://mitiendabit.com/tienda/producto/59/remeras-lisas-de-algodon-de-hombre,https://mitiendabit.com/uploads/1/thumb_1_prod_59_6366d19544de8.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_59_6366d1b1b8d7e.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_59_6366d1bc9a96e.webp,",MiTiendaBit,212,459,,,,,Male,"blanco,negro","S,M,L","all ages",algodon,,,,urbano,active
+58,"Top Paisana de fibrana con manga larga y frunce en el pecho","Confeccionado en fibrana, de manga larga y frunce en el pecho es ideal para combinar con shorts, pantalones o polleras.
+
+Te brindará comodidad y frescura en los días de verano.
+
+Disponible en talle único y en los colores blanco, negro, camel y verde militar.
+
+¡Luce radiante en esta temporada con el Top Paisana!
+
+Te recomendamos consultar la disponibilidad de color antes de realizar la compra.","available for order",new,"20,100 ARS",https://mitiendabit.com/tienda/producto/58/top-paisana-de-fibrana-con-manga-larga-y-frunce-en-el-pecho,https://mitiendabit.com/uploads/1/thumb_1_prod_58_635d152322727.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_58_635d154b05dba.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_58_635d1561ea562.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_58_635d15787f16b.webp",MiTiendaBit,212,430,,"17,300 ARS",2025-03-03T00:00-03:00,,Female,"blanco,negro","S,M,L","all ages",algodon,,,,urbano,active
+57,"Bermuda Mom Azul con Roturas","Bermuda de jeans con efecto de rotura, brinda al usuario lo último en comodidad, perfecto para actividades de ocio. Ideal para combinar con un sinfín de ítems de estilo streetwear o urbano informal.
+
+Versátiles y fáciles de combinar, las bermudas de jeans desvelan infinitas combinaciones posibles, para el hombre de mil facetas que ama llevar ropa siempre diferente.
+
+-
+
+Género: Hombre
+
+-
+
+Tipo de short: Bermuda
+
+-
+
+Tiro del short: Medio
+
+-
+
+Material principal: Jean
+
+-
+
+Composición: Jean
+
+-
+
+Temporada de lanzamiento: Primavera/Verano
+
+-
+
+Año de lanzamiento: 2022
+
+-
+
+Tipo de largo: Corto
+
+-
+
+Con bolsillos: Sí
+
+- Talles del 38 al 48","in stock",new,"19,800 ARS",https://mitiendabit.com/tienda/producto/57/bermuda-mom-azul-con-roturas,https://mitiendabit.com/uploads/1/thumb_1_prod_57_6359270a291d4.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_57_6395dc52bb356.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_57_6395dc6d16d83.webp,",MiTiendaBit,204,465,,,,,Male,"blanco,negro","S,M,L","all ages",algodon,,,,urbano,active
+56,"Jean de hombre elastizado con roturas","Los Jeans Elastizados con efecto de Rotura, perfecto para actividades diarias. Ideal para combinar con un sinfín de ítems de estilo streetwear o urbano informal. desvelando infinitas combinaciones fáciles y versátiles, para el hombre de mil facetas que ama llevar un estilo diferente cada día.
+
+- Género: Hombre
+- Material principal: Jean
+- Temporada: Primavera/Verano
+- Con bolsillos: Sí
+- Talles del 38 al 48
+
+Consultar por talle y colores disponibles","in stock",new,"34,700 ARS",https://mitiendabit.com/tienda/producto/56/jean-de-hombre-elastizado-con-roturas,https://mitiendabit.com/uploads/1/thumb_1_prod_56_635a62f400cae.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_56_635a63e82eea4.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_56_635a6731dc47b.webp,",MiTiendaBit,204,465,,,,,Male,"blanco,negro","S,M,L","all ages",algodon,,,,urbano,active
+55,"Short de Bano Estampado de Microfibra","Short de baño estampado para hombre, de microfibra con suspensor y bolsillo trasero con abrojo
+
+• Talles 1 al 5","in stock",new,"17,000 ARS",https://mitiendabit.com/tienda/producto/55/short-de-bano-estampado-de-microfibra,https://mitiendabit.com/uploads/1/thumb_1_prod_55_6358797644c5c.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_55_6358799666c77.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_55_635879a6592f8.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_55_635879bcc8591.webp",MiTiendaBit,204,465,,,,,Male,"blanco,negro","S,M,L","all ages",algodon,,,,urbano,active
+54,"Pollera Mini Vintage White LAS LOCAS","Características
+
+-
+
+Género: Mujer
+
+-
+
+Tipo de pollera: Tubo
+
+-
+
+Tipo de largo: Corta
+
+-
+
+Tipo de tiro: Alto
+
+-
+
+Material: Jean","in stock",new,"28,800 ARS",https://mitiendabit.com/tienda/producto/54/pollera-mini-vintage-white-las-locas,https://mitiendabit.com/uploads/1/thumb_1_prod_54_63587459ced7b.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_54_63587462d0fb5.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_54_6358748490dfb.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_54_635be5900eff5.webp",MiTiendaBit,207,439,,,,,Female,"blanco,negro","S,M,L","all ages",algodon,,,,urbano,active
+53,"Maxibuzos de Friza","Maxi buzo de algodón frizado con bolsillos laterales.
+
+Dibujo sublimado alusivo de Disney.
+
+Talle único (M)","in stock",new,"26,500 ARS",https://mitiendabit.com/tienda/producto/53/maxibuzos-de-friza,https://mitiendabit.com/uploads/1/thumb_1_prod_53_6358735cb9f81.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_53_6358737014901.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_53_6358738b6e1c3.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_53_6358739c4e68e.webp",MiTiendaBit,5598,454,,,,,Female,"blanco,negro","S,M,L","all ages","algodon y poliester con friza",,,,urbano,active
+52,"Remeras Sublimadas","Cómodas remeras de marga corta y cuello redondo
+
+Confeccionadas en algodón y sublimadas con distintos motivos .","available for order",new,"13,000 ARS",https://mitiendabit.com/tienda/producto/52/remeras-sublimadas,https://mitiendabit.com/uploads/1/thumb_1_prod_52_6358367d9043f.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_52_63583703b5b5c.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_52_6358371875455.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_52_6358372e8d687.webp",MiTiendaBit,212,430,,,,,Female,"blanco,negro","S,M,L","all ages",algodon,,,,urbano,active
+51,"Short Crissin Gray","Para el Mujer de mil facetas que ama llevar ropa siempre diferente.
+
+Brinda confort y comodidad, perfecta para actividades cotidianas. Ideal para combinar con un sinfín de combinaciones de estilo streetwear o urbano informal.","in stock",new,"29,100 ARS",https://mitiendabit.com/tienda/producto/51/short-crissin-gray,https://mitiendabit.com/uploads/1/thumb_1_prod_51_635835a108a36.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_51_635835afe3723.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_51_635835c6a089d.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_51_635835d741160.webp","Las Locas",207,439,,,,,Female,"blanco,negro","S,M,L","all ages",algodon,,,,urbano,active
+49,"Short Bermuda Negro con Roturas","Para la Mujer de mil facetas que ama llevar ropa siempre diferente.
+
+Brinda confort y comodidad, perfecta para actividades cotidianas. Ideal para combinar con un sinfín de estilos streetwear o urbano informal.","in stock",new,"23,500 ARS",https://mitiendabit.com/tienda/producto/49/short-bermuda-negro-con-roturas,https://mitiendabit.com/uploads/1/thumb_1_prod_49_6358342b0f372.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_49_63583457470dd.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_49_635834660c67d.webp,","Oriental Blue",207,439,,,,,Female,negro,"S,M,L","all ages",Jean,,,,urbano,active
+47,"Vestido Julie Evase","Para ti que buscas comodidad y frescura en días calurosos.
+
+-","in stock",new,"19,400 ARS",https://mitiendabit.com/tienda/producto/47/vestido-julie-evase,https://mitiendabit.com/uploads/1/thumb_1_prod_47_635c261b13756.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_47_635c264b56470.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_47_635c2671935d4.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_47_635c2690e7af6.webp",MiTiendaBit,2271,443,,,,,Female,"blanco,negro","S,M,L","all ages",algodon,,,,urbano,active
+46,"Jeans MOM con Roturas","Para la Mujer de hoy que ama llevar ropa siempre diferente.
+
+Brinda confort y comodidad, perfecta para actividades cotidianas. Ideal para combinar con un sinfín de combinaciones de estilo streetwear o urbano informal.
+
+- Género: Mujer
+- Color: Celeste
+- Estilo: Con Roturas al Frente
+- Bolsillos Traseros: SI
+- Bolsillos Delantero: Si
+- Tipo: Pantalon MOM
+- Tiro: Alto
+- Material principal: Jean
+- Temporada de lanzamiento: Primavera/Verano
+- Talles 36 al 46","in stock",new,"27,700 ARS",https://mitiendabit.com/tienda/producto/46/jeans-mom-con-roturas,https://mitiendabit.com/uploads/1/thumb_1_prod_46_6375063b65b53.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_46_63750658636c1.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_46_63750673ab0bd.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_46_6375068c2d23d.webp","Melanyz Jeans",207,450,,,,,Female,"blanco,negro","S,M,L","all ages",algodon,,,,urbano,active
+45,"Joggers de Bengalina con Franja Lateral","Cómodos Joggers de Bengalina con bolsillos estilo ""chino"" y puño en el tobillo.
+Tienen una franja Negra o Blanca, en los laterales que va desde la cintura hasta el tobillo.
+
+- Tipo: Largo
+- Género: Hombre
+- Material principal: Bengalina
+- Modelo: Jogger
+- Corte del pantalón: Chupin
+- Tiro del pantalón: Tiro bajo
+- Temporada: Primavera/Verano
+
+Consultar talles y colores disponibles","in stock",new,"23,000 ARS",https://mitiendabit.com/tienda/producto/45/joggers-de-bengalina-con-franja-lateral,https://mitiendabit.com/uploads/1/thumb_1_prod_45_63582d56e5b4f.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_45_63582d67b3396.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_45_63582da0bd68d.webp,",generico,204,465,,,,,Male,"blanco,negro","S,M,L","all ages",Bengalina,,,,urbano,active
+44,"Buzos largos de lanilla y lanilla morley","Buzos largos de lanilla y lanilla morley
+• Remerones tipo sweaters
+• Talles XL XXL
+• Varios colores","in stock",new,"15,900 ARS",https://mitiendabit.com/tienda/producto/44/buzos-largos-de-lanilla-y-lanilla-morley,https://mitiendabit.com/uploads/1/thumb_1_prod_44_63582bbf5c382.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_44_63582c6252e58.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_44_63582c6e0e539.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_44_63582c88de4dc.webp",MiTiendaBit,5598,454,,,,,Female,"blanco,negro","S,M,L","all ages","algodon y poliester con friza",,,,urbano,active
+43,"Chalecos de lanilla morley","Chalecos Morley de lanilla
+
+Chaleco de morley. infaltable esta temporada. Perfecto para combinar con tu remera o camisa favorita.
+
+Talle Unico","available for order",new,"12,900 ARS",https://mitiendabit.com/tienda/producto/43/chalecos-de-lanilla-morley,https://mitiendabit.com/uploads/1/thumb_1_prod_43_63582a35d9d6a.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_43_63582a427e68a.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_43_63582a522c4e5.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_43_63582a616d381.webp",MiTiendaBit,212,2967,,,,,Female,"blanco,negro","S,M,L","all ages",algodon,,,,urbano,active
+42,"Jeans Lisos Elastizados de Hombre","Los Jeans Lisos Elastizados brindan al usuario comodidad, perfecto para actividades diarias. Ideal para combinar con un sinfín de ítems de estilo streetwear o urbano informal.desvelando infinitas combinaciones fáciles y versátiles, para el hombre de mil facetas que ama llevar un estilo diferente cada día.
+
+- Género: Hombre
+- Material principal: Jean
+- Temporada: Primavera/Verano
+- Con bolsillos: Sí
+- Talles del 38 al 48
+
+Consultar por talle y colores disponibles","in stock",new,"34,700 ARS",https://mitiendabit.com/tienda/producto/42/jeans-lisos-elastizados-de-hombre,https://mitiendabit.com/uploads/1/thumb_1_prod_42_63582a6d5261a.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_42_63582a819d0ca.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_42_63582a92be50d.webp,",generico,204,463,,,,,Male,"blanco,negro","S,M,L","all ages",algodon,,,,urbano,active
+41,"Remerones animados","Elaborado en Algodón, de manga Corta y  cuello Redondo
+
+Ideal ya sea para estar en tu casa haciendo fiaca, salir a pasar el rato, andar en bici o para aquello que más le guste.","available for order",new,"17,300 ARS",https://mitiendabit.com/tienda/producto/41/remerones-animados,https://mitiendabit.com/uploads/1/thumb_1_prod_41_6358274cf275a.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_41_6358283110070.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_41_6358284d58d5f.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_41_635828673a00c.webp",CLGropa,212,430,,,,,Female,,"Unico (equivalente M)","all ages",algodon,varios,,,urbano,active
+40,"Joggers de Bengalina","Los joggers de bengalina son la eleccion perfecta para aquellos caballeros que buscan comodidad sin sacrificar estilo. Confeccionados en un material suave y elastico, cuentan con bolsillos estilo chino y un tiro bajo que le dan un toque urbano.
+
+Ademas, el puño en el tobillo los hace ideales para combinar con zapatillas y crear un outfit streetwear en tendencia. Disponibles en diferentes colores y tallas para adaptarse a cualquier gusto y preferencia.
+
+Consultar por talles y colores disponibles","in stock",new,"23,000 ARS",https://mitiendabit.com/tienda/producto/40/joggers-de-bengalina,https://mitiendabit.com/uploads/1/thumb_1_prod_40_635824ad75ad1.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_40_635824c17ea8c.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_40_635824dc9fdb1.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_40_635825358ba9e.webp",generico,204,538,,,,,Male,"blanco,negro","S,M,L","all ages",algodon,,,,urbano,active
+38,"Remeras Estampadas","Remeras estampadas de Jersey peinado
+
+Talle único abarca S M L
+
+4 Colores
+
+Varios diseños","available for order",new,"14,700 ARS",https://mitiendabit.com/tienda/producto/38/remeras-estampadas,https://mitiendabit.com/uploads/1/thumb_1_prod_38_635820cac9586.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_38_6358210392e12.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_38_63582118a43fc.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_38_6358212cca36d.webp",MiTiendaBit,212,430,,,,,Female,"blanco,negro","S,M,L","all ages",algodon,varios,,,urbano,active
+36,"Camisetas de Argentina Qatar 2022","Camisetas de Argentina Sublimadas
+
+Talles del S al XXL","in stock",new,"17,100 ARS",https://mitiendabit.com/tienda/producto/36/camisetas-de-argentina-qatar-2022,https://mitiendabit.com/uploads/1/thumb_1_prod_36_6358038d6fd3b.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_36_635803beb670d.webp,",generico,166,455,,,,,Female,"blanco,negro","S,M,L","all ages",algodon,"Seleccion futbol Argentina",,,urbano,active
+35,"Remera estampada Qatar","Remeras de algodon 100% de buena calidad con estampado alusivo a la seleccion Argentina
+
+talla S al XL","in stock",new,"16,600 ARS",https://mitiendabit.com/tienda/producto/35/remera-estampada-qatar,https://mitiendabit.com/uploads/1/thumb_1_prod_35_635800e0bc740.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_35_635800f505619.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_35_63580103783e3.webp,https://mitiendabit.com/uploads/1/thumb_1_prod_35_63580111a3500.webp",generico,166,455,,,,,Female,"blanco,negro","S,M,L","all ages",algodon,fútbol,,,urbano,active
+16,"Jeans MOM con Roturas de hombre","Los Jeans MOM con efecto de Rotura, Amplios y comodos son perfectos para actividades diarias. Ideal para combinar con un sinfin de items de estilo streetwear o urbano informal. desvelando infinitas combinaciones faciles y versatiles, para el hombre de mil facetas que ama llevar un estilo diferente cada dia.
+
+Temporada: Primavera/Verano
+
+Consultar por talle y colores disponibles","in stock",new,"34,700 ARS",https://mitiendabit.com/tienda/producto/16/jeans-mom-con-roturas-de-hombre,https://mitiendabit.com/uploads/1/thumb_1_prod_16_6366c5cb5e51f.webp,"https://mitiendabit.com/uploads/1/thumb_1_prod_16_6366c5dbf3fe9.webp,",MiTiendaBit,204,463,,,,,Male,"blanco,negro","38, 40, 42, 44, 46, 48","all ages",algodon,,,,urbano,active

@@ -1,0 +1,8 @@
+[13-Jul-2022 12:34:56 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught Error: Class "Controllers" not found in /home/mitienda/public_html/Controllers/Carrito.php:5
+Stack trace:
+#0 {main}
+  thrown in /home/mitienda/public_html/Controllers/Carrito.php on line 5
+[01-Apr-2023 00:27:11 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught Error: Class "Controllers" not found in /home/mitienda/public_html/Controllers/Tienda.php:5
+Stack trace:
+#0 {main}
+  thrown in /home/mitienda/public_html/Controllers/Tienda.php on line 5

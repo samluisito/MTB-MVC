@@ -1,0 +1,797 @@
+.next-slick3 {
+  right: 3%;
+}
+
+
+/*transicion */
+.fade.show {
+  opacity: 1;
+}
+
+.fade {
+  opacity: 0;
+  transition: opacity .15s linear;
+}
+
+/*
+.menu-mobile {
+  display: block;
+  overflow: hidden;
+  max-height: 0px;
+  transition: max-height 0.5s ease-in 0s;
+  -webkit-transition: max-height 0.5s ease-in 0s;
+  -moz-transition:  max-height 0.5s ease-in 0s;
+  -ms-transition:  max-height 0.5s ease-in 0s;
+  -o-transition:  max-height 0.5s ease-in 0s;
+}
+
+.menu-mobile:not(:not(.active-menu)){
+  overflow: hidden;
+  max-height: 500px;
+  transition: max-height 0.5s ease-out 0s;
+  -webkit-transition: max-height 0.5s ease-out 0s;
+  -moz-transition:  max-height 0.5s ease-out 0s;
+  -ms-transition:  max-height 0.5s ease-out 0s;
+  -o-transition:  max-height 0.5s ease-out 0s;
+}
+*/
+
+
+/*menu de tienda --------------------------------------------------------------*/
+.wrap-menu-desktop{
+  background-color: #ffffff1a;
+  height:70px;
+}
+.sub-menu {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 5px;
+  min-width: max-content;
+  max-width: 400px;
+}
+.sub-menu li{
+  padding: 5px;
+}
+.sub-menu a{
+  display: contents;
+}
+.arrow-main-menu-m {
+  font-size: 150%;
+  padding-left: 50%;
+}
+/*.espacio_superior{
+    margin-top: 70px;
+}*/
+
+.m-active-menu a{
+  text-decoration: underline;
+}
+
+
+
+.sub-menu-dataserv{
+  width: fit-content;
+
+  max-width: 40vh;
+  max-height: 100vh;
+  overflow: overlay;
+  white-space: nowrap;
+  left:-600% !important;
+
+}
+
+.sub-menu-dataserv pre{
+
+  overflow: initial;
+
+  font-size:small ;
+}
+
+/*Carrusel en home --------------------------------------------------------*/
+.carousel-control-next, .carousel-control-prev{
+  width: 5%;
+}
+.carousel-caption {
+  left: 6%;
+  right: 40%;
+  padding-bottom: 16%;
+}
+.respon1{
+  font-size:70px ;
+}
+.respon3 {
+  padding: 30px;
+}
+
+/*banner en home --------------------------------------------------------*/
+
+.sec-relate-product{
+}
+
+
+/*BLog  --------------------------------------------------------------*/
+.img-mini-prod {
+  max-width: 90px;
+  max-height: 110px;
+  display: flex;
+}
+.img-portada-blog {
+
+  max-height: 413px;
+  max-width: 825px;
+
+}
+/*Lista de productos carrito de compras ----------------------------------------*/
+.table-shopping-cart .column-6 {
+  width: 72px;
+  padding-right: 5px;
+  font-size: 16px;
+}
+/*Modal carrito de compras ----------------------------------------*/
+.header-cart-title {
+  width: 300px;
+}
+/*carrusel Bammer en home ----------------------------------------*/
+/*.item-slick1 {
+   background-position: center center;
+}*/
+/*carrusel inferior de producto ----------------------------------------*/
+.item-slick2 {
+  width: 300px;
+}
+
+
+/*ocultar botones de cantidad en producto y carrito ============================*/
+input.num-product{
+  -webkit-appearance: textfield ;
+  margin: 0px;
+  -moz-appearance: textfield ;
+}
+
+/*Carrito de compras Procesar Pago=========================================*/
+.divMetodPago label input {
+  margin-right: 15px;
+
+
+}
+.divMetodPago label{
+  width: 100%;
+  display: inline-flex !important;
+}
+
+.divRetiroEnvio label{
+  width: 100%;
+  display: inline-flex !important;
+}
+.divRetiroEnvio label input{
+  margin: 5px;
+  padding-bottom: 5px;
+}
+
+#divCondiciones {
+  width: 100%;
+  display: flex;
+}
+#divCondiciones input label a{
+  margin-right: 10px;
+
+}
+#divCondiciones input{
+  margin-top: 5px;
+}
+
+/*=========================================*/
+
+.modal{
+  z-index: 9999;
+}
+
+
+/*Estilos Loading --------------------------------------------------------------*/
+#divLoading{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(254,254,255, .90);
+  z-index: 9999;
+  display: flex;
+
+  transition: all .1s ease ;
+  transition-delay: 0.5s ;
+
+  -moz-transition:all .1s ease ;
+  -moz-transition-delay: 0.5s ;
+
+  -webkit-transition: all .1s ease ;
+  -webkit-transition-delay: 0.5s ;
+
+}
+/*imagen de espera*/
+#divLoading img{
+  width: 50px;
+  height: 50px;
+}
+/*MENU----------------------------------------------------*/
+.main-menu{
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+/*logo sup derecho*/
+.logo {
+  margin-right: 2%;
+}
+.logo-mobile img{
+  max-height: calc(100% - 5px);
+}
+.logo img{
+  max-height: calc(100% - 15px);
+}
+
+.imgBanner {
+  top: 10px !important;
+}
+
+/*paginado------------------------------------------------*/
+.pagination{
+  flex-wrap: wrap;
+}
+.page-item{
+  margin-left: -5px;
+  margin-right:  -5px;
+}
+
+.divSearch{
+  border: 3px !important;
+  padding-top: -1px;
+  padding-bottom: -1px;
+}
+
+.overlay-modal1{
+  background: #070b11db;
+  opacity: 1;
+}
+
+/* alerta en validacion de campos------------------------------*/
+.invalid-feedback{
+  display:flex;
+}
+.valid-feedback{
+  display:flex;
+}
+
+/*oculatar elemento --------------------------------------------*/
+.notBlock{
+  display: none;
+}
+
+
+
+/*TYNIMCE -------------------------------------------------------------------------*/
+
+.container-producto p{
+  margin-bottom: 15px;
+}
+
+.container-producto ul, .container-producto ol{
+  margin-left: 20px;
+  margin-bottom: 15px;
+}
+.container-producto ul, .container-producto ul li{
+  list-style: initial;
+}
+.container-producto ol li{
+  list-style: image-set;
+}
+
+/* Removes margins on paragraphs, might be useful for mail clients*/
+/*p { margin: 0 }*/
+
+/* For rendering images inserted using the image plugin.
+ Includes image captions using the HTML5 figure element.*/
+
+figure.image {
+  display: inline-block;
+  border: 1px solid gray;
+  margin: 0 2px 0 1px;
+  background: #f5f2f0;
+}
+
+figure.align-left {
+  float: left;
+}
+
+figure.align-right {
+  float: right;
+}
+
+figure.image img {
+  margin: 8px 8px 0 8px;
+}
+
+figure.image figcaption {
+  margin: 6px 8px 6px 8px;
+  text-align: center;
+}
+
+/* Alignment using classes rather than inline styles check out the "formats" option*/
+
+img.align-left {
+  float: left;
+}
+
+img.align-right {
+  float: right;
+}
+
+/* Basic styles for Table of Contents plugin (toc) */
+.mce-toc {
+  border: 1px solid gray;
+}
+
+.mce-toc h2 {
+  margin: 4px;
+}
+
+.mce-toc li {
+  list-style-type: none;
+}
+
+/* Premium Plugins CSS*/
+/* The Checklist Plugin */
+
+.tox-checklist > li:not(.tox-checklist--hidden) {
+  list-style: none;
+  margin: 0.25em 0;
+  position: relative;
+}
+.tox-checklist > li:not(.tox-checklist--hidden)::before {
+  content: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cg%20id%3D%22checklist-unchecked%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Crect%20id%3D%22Rectangle%22%20width%3D%2215%22%20height%3D%2215%22%20x%3D%22.5%22%20y%3D%22.5%22%20fill-rule%3D%22nonzero%22%20stroke%3D%22%234C4C4C%22%20rx%3D%222%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E%0A");
+  cursor: pointer;
+  height: 1em;
+  margin-left: -1.5em;
+  margin-top: 0.125em;
+  position: absolute;
+  width: 1em;
+}
+.tox-checklist li:not(.tox-checklist--hidden).tox-checklist--checked::before {
+  content: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cg%20id%3D%22checklist-checked%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Crect%20id%3D%22Rectangle%22%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%234099FF%22%20fill-rule%3D%22nonzero%22%20rx%3D%222%22%2F%3E%3Cpath%20id%3D%22Path%22%20fill%3D%22%23FFF%22%20fill-rule%3D%22nonzero%22%20d%3D%22M11.5703186%2C3.14417309%20C11.8516238%2C2.73724603%2012.4164781%2C2.62829933%2012.83558%2C2.89774797%20C13.260121%2C3.17069355%2013.3759736%2C3.72932262%2013.0909105%2C4.14168582%20L7.7580587%2C11.8560195%20C7.43776896%2C12.3193404%206.76483983%2C12.3852142%206.35607322%2C11.9948725%20L3.02491697%2C8.8138662%20C2.66090143%2C8.46625845%202.65798871%2C7.89594698%203.01850234%2C7.54483354%20C3.373942%2C7.19866177%203.94940006%2C7.19592841%204.30829608%2C7.5386474%20L6.85276923%2C9.9684299%20L11.5703186%2C3.14417309%20Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E%0A");
+}
+/* The Page Embed plugin */
+.tiny-pageembed--21by9,
+.tiny-pageembed--16by9,
+.tiny-pageembed--4by3,
+.tiny-pageembed--1by1 {
+  display: block;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  width: 100%;
+}
+
+.tiny-pageembed--21by9 {
+  padding-top: 42.857143%;
+}
+
+.tiny-pageembed--16by9 {
+  padding-top: 56.25%;
+}
+
+.tiny-pageembed--4by3 {
+  padding-top: 75%;
+}
+
+.tiny-pageembed--1by1 {
+  padding-top: 100%;
+}
+
+.tiny-pageembed--21by9 iframe,
+.tiny-pageembed--16by9 iframe,
+.tiny-pageembed--4by3 iframe,
+.tiny-pageembed--1by1 iframe {
+  border: 0;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+/* The Media Embed plugin */
+.ephox-summary-card {
+  border: 1px solid #AAA;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+  padding: 10px;
+  overflow: hidden;
+  margin-bottom: 1em;
+}
+
+.ephox-summary-card a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.ephox-summary-card a:visited {
+  color: inherit;
+}
+
+.ephox-summary-card-title {
+  font-size: 1.2em;
+  display: block;
+}
+
+.ephox-summary-card-author {
+  color: #999;
+  display: block;
+  margin-top: 0.5em;
+}
+
+.ephox-summary-card-website {
+  color: #999;
+  display: block;
+  margin-top: 0.5em;
+}
+
+.ephox-summary-card-thumbnail {
+  max-width: 180px;
+  max-height: 180px;
+  margin-left: 2em;
+  float: right;
+}
+
+.ephox-summary-card-description {
+  margin-top: 0.5em;
+  display: block;
+}
+
+/*body html---------------------------------------------------------------- */
+body, html {
+
+  background-color: #e6e6e6;
+}
+/*body {
+    background-image: url("../images/300x200image-from-rawpixel-id-2429786-png.png");
+   
+     color: #363639;
+    font-family: 'Work Sans', sans-serif;
+}*/
+
+
+/*------------------------------------------------------------------
+[ modal Login y pag login ]*/
+
+.container-login {
+  max-width: 360px !important;
+}
+.btn-login-with {
+  font-family:inherit ;
+  font-size: 16px;
+  color: #fff;
+  line-height: 1.2;
+
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+}
+.btn-login-with i {
+  font-size: 20px;
+  margin-right: 10px;
+}
+.btn-login-with:hover {
+  color: #fff;
+  background-color: #333333;
+}
+.bgtw{
+  background-color: #1da1f2;
+}
+.bgfb{
+  background-color: #3b5998;
+}
+
+
+/*------------------------------------------------------------------
+[ porducto tienda]*/
+
+.text-recort {
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  padding-left: 0%;
+  padding-right: 0%;
+}
+.precio{
+  padding-left: 1%;
+  padding-right: 1%;
+}
+
+/*------------------------------------------------------------------
+[Boton Whatsapp]*/
+
+.whatsapp {
+  position:fixed;
+  width:50px;
+  height:50px;
+  bottom:40px;
+  right:35px;
+  background-color:#25d366;
+  color:#FFF;
+  border-radius:50px;
+  text-align:center;
+  font-size:30px;
+  z-index:100;
+  transition: all 0.4s;
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+}
+
+.whatsapp-icon {
+  margin-top:10px;
+}
+
+
+/*//////////////////////////////////////////////////////////////////
+[ XL ]*/
+@media (max-width: 1199px) {
+  .carousel-caption {
+    left: 6%;
+    right: 35%;
+    padding-bottom: 13%;
+  }
+
+  .respon1{
+    font-size:55px;
+  }
+  .respon2{
+    font-size: 28px;
+  }
+  .respon3 {
+    padding: 25px;
+  }
+}
+/*//////////////////////////////////////////////////////////////////
+[ LG ]*/
+@media (max-width: 991px) {
+  .carousel-caption {
+    left: 6%;
+    right: 30%;
+    padding-bottom: 10%;
+  }
+  .respon1{
+    font-size:40px;
+  }
+  .respon2{
+    font-size: 26px;
+  }
+  .respon3 {
+    padding: 20px;
+  }
+
+  .espacio_superior{
+    margin-top: 0px !important;
+  }
+}
+
+/*//////////////////////////////////////////////////////////////////
+[ MD ]*/
+@media (max-width: 767px) {
+  .carousel-caption {
+    left: 6%;
+    right: 25%;
+    padding-bottom: 8%;
+  }
+  .respon1{
+    font-size:xxx-large;
+  }
+  .respon2{
+    font-size: 22px;
+  }
+  .respon3 {
+    padding: 15px;
+  }
+
+}
+@media (max-width: 767px) and (orientation: portrait) {
+  .item-slick1 {
+    height: calc(75vh - 80px) !important;
+  }
+}
+
+/*//////////////////////////////////////////////////////////////////
+[ SM ]*/
+@media (max-width: 575px) {
+  .carousel-caption {
+    left: 6%;
+    right: 20%;
+    padding-bottom: 5%;
+  }
+  .respon1{
+    font-size:xx-large;
+  }
+  .respon2{
+    font-size: 19px;
+  }
+  .respon3 {
+    padding: 10px;
+  }
+  .header-cart::after {
+    height: 4%;
+    min-height: 15px;
+  }
+  .whatsapp {
+    right:10px;
+  }
+
+  .p-l-10-col-sm-6{
+    padding-left: 10px !important;
+  }
+  .p-r-10-col-sm-6{
+    padding-right: 10px !important;
+  }
+
+
+}
+@media (max-width: 575px) and (orientation: portrait){
+  .item-slick1 {
+    height: calc(70vh - 80px) !important;
+  }
+}
+
+/*//////////////////////////////////////////////////////////////////
+[ SSM ]*/
+@media (max-width: 480px) {
+  .carousel-caption {
+    left: 6%;
+    right: 15%;
+    padding-bottom: 3%;
+  }
+  .respon1{
+    font-size: xx-large;
+  }
+  .respon2{
+    font-size: 16px;
+  }
+  .respon3 {
+    padding: 5px;
+  }
+  .p-l-10-col-sm-6{
+    padding-left: 8px !important;
+  }
+  .p-r-10-col-sm-6{
+    padding-right: 8px !important;
+  }
+
+}
+@media (max-width: 480px) and (orientation: portrait){
+  .item-slick1 {
+    height: calc(70vh - 80px) !important;
+  }
+}
+
+.prod-pic-rel{
+  aspect-ratio: 0.81/1;
+  background-size: cover !important;
+  background-repeat: no-repeat ;
+  background-position: center !important;
+}
+.prod-scale-img{
+  width: 100%;
+  height: 100%;
+  object-fit: scale-down;
+
+  background-size: contain;
+  -webkit-background-size: contain; /* For WebKit*/
+  -moz-background-size: contain; /* Mozilla*/
+  -o-background-size: contain; /* Opera*/
+
+  border: 0px solid #fff;
+  backdrop-filter: blur(20px) ;
+}
+
+
+/*//////////////////////////////////////////////////////////////////
+[ Table Shopping Cart ]*/
+.table-shopping-cart .table_row_checkout {
+  height: 80px;
+}
+
+.table-shopping-cart .column-start {
+  width: 130px;
+  padding-left: 20px;
+
+}
+
+.table-shopping-cart .column-left {
+  width: 320px;
+  font-size: 15px;
+  text-align: left;
+}
+
+.table-shopping-cart .column-center {
+  width: 110px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.table-shopping-cart .column-right {
+  width: 110px;
+  text-align: right;
+}
+
+.table-shopping-cart .column-end {
+  width: 110px;
+  padding-right: 20px;
+  text-align: right;
+  font-size: 16px;
+}
+
+.how-itemcart2 {
+  width: 40px;
+  position: relative;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.how-itemcart2 img {
+  width: 40px;
+  margin-left: 50%;
+}
+
+.how-itemcart2::after {
+  /*   content: 'X';*/
+  font-family: arial;
+  font-size: 16px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.5);
+  color: #fff;
+  transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  opacity: 0;
+}
+
+.mce-content-body p {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+
+.del_precio_oferta{
+  text-decoration: line-through;
+  color: gray;
+}
+
+/*estado del stock*/
+.out-of-stock {
+  color: #e2401c;
+}
+
+
+.label-new::after{
+  top: 18px;
+}

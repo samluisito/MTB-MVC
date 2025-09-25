@@ -1,0 +1,89 @@
+<?= headerAdmin($data); ?>
+<!--<div id="contentAjax"></div>-->
+<!-- Data Table -->
+<div class="row">
+  <div class="col-lg-12">
+    <div id="addproduct-accordion" class="custom-accordion">
+      <div class="card">
+        <a href="#addproduct-billinginfo-collapse" class="text-dark" data-bs-toggle="collapse" aria-expanded="true" aria-controls="addproduct-billinginfo-collapse"></a>
+        <div class="p-4">
+          <form id="formFiltroTableProveedores" >
+            <div class="row">
+              <div class="col-md-2">
+                <!--                <div class="mb-3">
+                                  <label for="exampleSelect1">Categoria</label>
+                                  <select class="form-control" id="filtro_categoria" data-trigger></select>
+                                </div>-->
+              </div>
+              <div class="col-md-3">
+
+              </div>
+              <div class="col-md-3">
+
+              </div>
+              <div class="col-md-1">
+                <div class="mb-3">
+                  <label for="exampleSelect1">Estado</label>
+                  <div>
+                    <select class="form-control" id="filtro_estado">
+                      <option value='a' selected="selected">Activo</option>
+                      <option value='i'>Inactivo</option>
+                      <option value='t'>Todos</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="mt-4">
+                  <button class="btn btn-primary m-1" type="submit"><i class="fa fa-filter" aria-hidden="true"></i> Filtrar</button>
+                </div>
+              </div>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <div id="addproduct-accordion" class="custom-accordion">
+      <div class="card">
+        <a href="#addproduct-billinginfo-collapse" class="text-dark" data-bs-toggle="collapse" aria-expanded="true" aria-controls="addproduct-billinginfo-collapse"></a>
+        <div class="p-4">
+          <div class="container table-responsive">
+            <table class="table display" style="width:100%"  id="tableProveedores">
+              <thead>
+                <tr>
+                  <th scope="col" >id</th>
+                  <th scope="col" >
+                    <?php if ($_SESSION['userPermiso'][$data["modulo"]]['crear'] == 1) { ?>
+                      <!--Boton Nuevo-->
+                      <button class="btn btn-success waves-effect waves-light mb-2 me-2" type="button" onclick="nvoProveedor()">
+                        <i class="fa fa-plus-circle" aria-hidden="true"></i> Nuevo</button>
+                      <?php } ?>
+                  </th>
+                  <th scope="col" >Nombre</th>
+                  <th scope="col" >Descripcion</th>
+                  <th scope="col" >opciones</th>
+                </tr>
+              </thead>      
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+</main>
+<?=
+require __DIR__ . '/modalProveedor.php'; //se llama a al modal
+getModal('modalCropper', $data); //se llama a al modal
+footerAdmin($data)
+?>   

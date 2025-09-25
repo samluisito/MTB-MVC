@@ -1,0 +1,4 @@
+[16-Jan-2023 21:31:17 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught Error: Call to undefined function headerAdmin() in /home/mitienda/public_html/Views/Dashboard/Dashboard.php:1
+Stack trace:
+#0 {main}
+  thrown in /home/mitienda/public_html/Views/Dashboard/Dashboard.php on line 1

@@ -1,0 +1,4 @@
+[23-Jul-2022 14:09:10 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught Error: Class "Mysql" not found in /home/mitienda/public_html/Models/ProductosModel.php:5
+Stack trace:
+#0 {main}
+  thrown in /home/mitienda/public_html/Models/ProductosModel.php on line 5

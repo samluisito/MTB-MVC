@@ -1,0 +1,283 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /*    background-image: url("./images/1920x1080_construction_background_514172.jpg");*/
+    background: #EFEFEF;
+    color: #363639;
+    font-family: 'Work Sans', sans-serif;
+}
+
+
+
+/* ? ----- PORTADA ----- */
+.portada {
+    width: 100%;
+    background: #EFEFEF;
+
+    min-height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: .5s ease-out all;
+}
+
+.portada.oculta {
+    transform: translateY(100%);
+}
+
+.portada .header {
+    margin-bottom: 100px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+.portada .header .logotipo {
+    font-size: 50px;
+    font-size: 900;
+    margin-bottom: 20px;
+}
+
+.portada .header .mensaje {
+    font-size: 30px;
+    font-weight: 600;
+}
+
+
+
+/* ? ----- MAIN ----- */
+main {
+    max-width: 1000px;
+    margin: auto;
+    width: 90%;
+    padding: 60px 0;
+    font-size: 18px;
+    line-height: 28px;
+    text-align: left;
+}
+
+
+
+/* ? ----- Cuenta Regresiva ----- */
+#cuenta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 100px;
+}
+
+.simply-section {
+    background: #fff;
+    width: 200px;
+    height: 200px;
+    margin: 20px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 4px;
+    border-radius: 5px;
+    border-style: groove;
+    border-color: #00000080;
+}
+
+.simply-amount {
+    display: block;
+    font-size: 60px;
+    font-weight: 700;
+}
+
+.simply-word {
+    font-weight: 300;
+    font-size: 33px;
+}
+
+
+/* ? ---------------------------- */
+
+
+
+/* ? ----- REDES SOCIALES ----- */
+.redes-sociales .btn-red-social {
+    padding: 15px 0;
+    display: inline-block;
+    min-width: 105px;
+    border-radius: 5px;
+    background: #FF0000;
+    color: #fff;
+    font-size: 34px;
+    margin: 20px 20px;
+    transition: .3s ease all;
+}
+
+.redes-sociales .btn-red-social:hover {
+    box-shadow: 0px 0px 50px 10px rgba(0,0,0,.15);
+}
+
+/*//////////////////////////////////////////////////////////////////
+[ XL ]*/
+@media (max-width: 1199px) {
+    .simply-section {
+        width: 180px;
+        height: 180px;
+    }
+    .simply-amount {
+        font-size: 50px;
+    }
+    .simply-word {
+        font-size: 30px;
+    }
+    .redes-sociales .btn-red-social {
+        padding:14px;
+        min-width: 100px;
+        font-size: 32px;
+        margin: 19px;
+    }
+    .portada .header {
+        margin-bottom: 90px;
+    }
+    .portada .header .logotipo {
+        font-size: 47px;
+        margin-bottom: 19px;
+    }
+    #cuenta{
+        margin-bottom: 90px;
+    }
+}
+
+/*//////////////////////////////////////////////////////////////////
+[ LG ]*/
+@media (max-width: 991px) {
+    .simply-section {
+        width: 160px;
+        height: 160px;
+        margin: 19px 19px;
+    }
+    .simply-amount {
+        font-size: 45px;
+    }
+    .simply-word {
+        font-size: 27px;
+    }
+    .redes-sociales .btn-red-social {
+        padding:13px;
+        min-width: 90px;
+        font-size: 30px;
+        margin: 18px;
+    }
+    .portada .header {
+        margin-bottom: 80px;
+    }
+    .portada .header .logotipo {
+        font-size: 44px;
+        margin-bottom: 18px;
+    }
+    #cuenta{
+        margin-bottom: 80px;
+    }
+}
+
+/*//////////////////////////////////////////////////////////////////
+[ MD ]*/
+@media (max-width: 767px) {
+    .simply-section {
+        width: 140px;
+        height: 140px;
+        margin: 18px 18px;
+    }
+    .simply-amount {
+        font-size: 40px;
+    }
+    .simply-word {
+        font-size: 24px;
+    }
+    .redes-sociales .btn-red-social {
+        padding:12px;
+        min-width: 80px;
+        font-size: 28px;
+        margin: 17px;
+    }
+    .portada .header {
+        margin-bottom: 70px;
+    }
+    .portada .header .logotipo {
+        font-size: 41px;
+        margin-bottom: 17px;
+    }
+    #cuenta{
+        margin-bottom: 70px;
+    }
+}
+
+/*//////////////////////////////////////////////////////////////////
+[ SM ]*/
+@media (max-width: 575px) {
+    .simply-section {
+        width: 120px;
+        height: 120px;
+        margin: 17px 17px;
+    }
+    .simply-amount {
+        font-size: 35px;
+    }
+    .simply-word {
+        font-size: 21px;
+    }
+    .redes-sociales .btn-red-social {
+        padding:11px;
+        min-width: 70px;
+        font-size: 26px;
+        margin: 16px;
+    }
+    .portada .header {
+        margin-bottom: 60px;
+    }
+    .portada .header .logotipo {
+        font-size: 38px;
+        margin-bottom: 16px;
+    }
+    #cuenta{
+        margin-bottom: 60px;
+    }
+}
+
+/*//////////////////////////////////////////////////////////////////
+[ SSM ]*/
+@media (max-width: 480px) {
+    .simply-section {
+        width: 100px;
+        height: 100px;
+        margin: 16px 16px;
+    }
+    .simply-amount {
+        font-size: 30px;
+    }
+    .simply-word {
+        font-size: 18px;
+    }
+    .redes-sociales .btn-red-social {
+        padding:10px;
+        min-width: 60px;
+        font-size: 18px;
+        margin: 15px;
+    }
+    .portada .header {
+        margin-bottom: 50px;
+    }
+    .portada .header .logotipo {
+        font-size: 35px;
+        margin-bottom: 15px;
+    }
+    #cuenta{
+        margin-bottom: 50px;
+    }
+}
