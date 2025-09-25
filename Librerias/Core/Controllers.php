@@ -2,88 +2,92 @@
 
 declare(strict_types=1);
 
-class Controllers {
+class Controllers
+{
+    protected ?object $model = null;
+    protected Views $views;
 
-  protected $model;
-  protected $views;
-  protected $data;
-
-  public function __construct() {
-    $class = get_class($this);
-//    
-
-    $this->loadModel($class);
-//        
-    $this->views = new Views($class);
-  }
-
-  function loadModel($class): void {
-    $model = $class . 'Model';
-    $modelPath = __DIR__ . '/../../Models/';
-    $modelFile = $modelPath . $model . '.php';
-    if (file_exists($modelFile)) {
-      require_once $modelFile;
-      $this->model = new $model();
-      $this->infoEmpresa();
-      if (isset($_COOKIE['id_sesion']) && empty($_SESSION['login'])) {
-        $this->restaurarSesion();
-      }
+    public function __construct()
+    {
+        $className = get_class($this);
+        $this->views = new Views($className);
+        $this->loadModel($className);
     }
-  }
 
-  function infoEmpresa(): void {
-    $vence = $_SESSION['info_empresa']['vence'] ?? '2000-01-01 00:00:00';
-    $now = time();
-    if (strtotime($vence) <= $now) {
-      $request = $this->model->select("SELECT oficial_venta, blue_venta,fecha FROM divisa WHERE idcotizacion = (SELECT MAX(idcotizacion) FROM divisa)");      // Consulta el valor de la última cotización de la divisa
-      if ($request) {
-        $cotizacion = $_SESSION['base']['region_abrev']=='VE'? $request['oficial_venta']: $request['blue_venta'];
-        $_SESSION['dolarhoy'] = array('precio' => $cotizacion, 'fecha' => $request['fecha']); // Si la consulta encontró un valor pasa un array a la variable de sesion con los datos de la nueva fecha.
-        strtotime($request['fecha']) <= $now ?? setDolarHoy(); // Si la fecha obtenida es menor a hoy entonces ejecutar setDolarHoy()
-      }
-      // Consulta la información de la empresa
-      $request = $this->model->select("SELECT * FROM config_gral WHERE idempresa = 1");
-      // Redondea el costo de envío y lo multiplica por la cotización del dólar actual
-      $dolar = $_SESSION['base']['region_abrev'] == 'VE' ? 1 : getDolarHoy();
-      $request['costo_envio'] = redondear_decenas($request['costo_envio'] * $dolar);
-      // Agrega la ruta completa de la imagen al array
-      $request['url_shortcutIcon'] = sprintf('%s%s', DIR_IMAGEN, $request['shortcut_icon']);
-      $request['url_logoMenu'] = sprintf('%s%s', DIR_IMAGEN, $request['logo_menu']);
-      $request['url_logoImpreso'] = sprintf('%s%s', DIR_IMAGEN, $request['logo_imp']);
-      // Establece la fecha de vencimiento de la sesión a 60 minutos a partir de ahora
-      $request['vence'] = date("Y-m-d H:i:s", strtotime("+60 minutes"));
-      // Establece la información de la empresa en la variable de sesión
-      $_SESSION['info_empresa'] = $request;
+    /**
+     * Carga el modelo correspondiente para el controlador.
+     * Por ejemplo, para el controlador 'Users', intenta cargar 'UsersModel'.
+     * También desencadena tareas relacionadas con la sesión después de cargar el modelo.
+     */
+    private function loadModel(string $className): void
+    {
+        $modelClass = $className . 'Model';
+        $modelFile = __DIR__ . '/../../Models/' . $modelClass . '.php';
+
+        if (file_exists($modelFile)) {
+            require_once $modelFile;
+            $this->model = new $modelClass();
+
+            // Estos métodos solo pueden ejecutarse si se carga un modelo con éxito.
+            $this->infoEmpresa();
+            if (isset($_COOKIE['id_sesion']) && empty($_SESSION['login'])) {
+                $this->restaurarSesion();
+            }
+        }
     }
-  }
 
-  private function restaurarSesion() {
-    // Verifica si la cookie de ID de sesión está establecida
-    // Obtiene el ID de sesión de la cookie
-    $idSesion = $_COOKIE['id_sesion'];
+    /**
+     * Almacena en caché la información general de la empresa en la sesión para reducir las consultas a la base de datos.
+     * La caché está configurada para expirar después de 60 minutos.
+     */
+    private function infoEmpresa(): void
+    {
+        $now = time();
+        $vence = $_SESSION['info_empresa']['vence'] ?? '2000-01-01 00:00:00';
 
-    // Busca el registro de la sesión en la base de datos
-    $querySql = "SELECT * FROM `sesiones` WHERE `id_sesion`=? AND `estado_sesion`=1"; // Solo busca sesiones activas
-    $resultado = $this->model->select($querySql, array($idSesion));
+        if (strtotime($vence) > $now) {
+            return; // La caché todavía es válida.
+        }
 
-    if ($resultado) {    // Si se encuentra la sesión en la base de datos, restaura los datos de la sesión en $_SESSION
-      $browser = getUserBrowser();
-      $OS = dispositivoOS();
-      if ($resultado['os'] == $OS || $resultado['browser'] == $browser) {
-        sessionLogin($this->model, $resultado['id_persona']);
-      }
+        // Obtiene la última cotización de la moneda.
+        $request = $this->model->select("SELECT oficial_venta, blue_venta, fecha FROM divisa WHERE idcotizacion = (SELECT MAX(idcotizacion) FROM divisa)");
+        if ($request) {
+            $cotizacion = ($_SESSION['base']['region_abrev'] === 'VE') ? $request['oficial_venta'] : $request['blue_venta'];
+            $_SESSION['dolarhoy'] = ['precio' => $cotizacion, 'fecha' => $request['fecha']];
+        }
 
-//      $arrDataSesion = json_decode($resultado[0]['arr_data_sesion'], true); // Convierte la cadena JSON en un array
-//      $_SESSION = $arrDataSesion;
-      //Actualiza la fecha de la sesión en la base de datos
-//      $fecha = date('Y-m-d H:i:s');
-//      $querySql = "UPDATE `sesiones` SET `fecha`='$fecha' WHERE `id_sesion`='$idSesion'";
-//      $this->modal->update($querySql);
+        // Obtiene la configuración general de la empresa.
+        $request = $this->model->select("SELECT * FROM config_gral WHERE idempresa = 1");
+        $dolar = ($_SESSION['base']['region_abrev'] === 'VE') ? 1 : getDolarHoy();
+        $request['costo_envio'] = redondear_decenas($request['costo_envio'] * $dolar);
+        $request['url_shortcutIcon'] = DIR_IMAGEN . $request['shortcut_icon'];
+        $request['url_logoMenu'] = DIR_IMAGEN . $request['logo_menu'];
+        $request['url_logoImpreso'] = DIR_IMAGEN . $request['logo_imp'];
+
+        // Establece una expiración de 60 minutos para los datos en caché.
+        $request['vence'] = date("Y-m-d H:i:s", strtotime("+60 minutes"));
+        $_SESSION['info_empresa'] = $request;
     }
-  }
 
-  public function getModel() {
-    return $this->model;
-  }
+    /**
+     * Restaura la sesión de un usuario utilizando un ID de sesión de una cookie ("recuérdame").
+     */
+    private function restaurarSesion(): void
+    {
+        $idSesion = $_COOKIE['id_sesion'];
+        $querySql = "SELECT * FROM `sesiones` WHERE `id_sesion`=? AND `estado_sesion`=1";
+        $resultado = $this->model->select($querySql, [$idSesion]);
 
+        if ($resultado) {
+            // Verificación de seguridad básica: asegurar que el SO o el navegador coincidan con el almacenado en la sesión.
+            if ($resultado['os'] === dispositivoOS() || $resultado['browser'] === getUserBrowser()) {
+                sessionLogin($this->model, $resultado['id_persona']);
+            }
+        }
+    }
+
+    public function getModel(): ?object
+    {
+        return $this->model;
+    }
 }
