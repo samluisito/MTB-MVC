@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+require_once __DIR__ . '/RedisCache.php';
+
 class Conexion {
 
   private static $connect = null;
@@ -10,22 +12,81 @@ class Conexion {
     // Solo ejecutar la lógica de conexión si la conexión aún no se ha establecido.
     if (self::$connect === null) {
       if (empty($_SESSION['base'])) {
-        $this->conectar(array(
+        // La configuración del cliente ahora se obtiene desde la caché o la base de datos.
+        $_SESSION['base'] = $this->getTenantConfig();
+      }
+
+      $this->conectar($_SESSION['base']);
+      $this->setConfiguracionRegional($_SESSION['base']);
+      require_once __DIR__ . '/../../Config/Propiedades.php';
+    }
+  }
+
+  private function getTenantConfig(): array
+  {
+      $cache = RedisCache::getInstance();
+      $cacheKey = 'db_config:' . BD_SELECT;
+
+      if ($cache->isConnected()) {
+          $cachedConfig = $cache->get($cacheKey);
+          if ($cachedConfig) {
+              return $cachedConfig;
+          }
+      }
+
+      // Si no está en caché o Redis no funciona, se obtiene de la BD y se guarda en caché.
+      return $this->fetchConfigFromControlDB($cache, $cacheKey);
+  }
+
+  private function fetchConfigFromControlDB(RedisCache $cache, string $cacheKey): array
+  {
+      // Credenciales para la base de datos central que contiene la información del inquilino.
+      $controlDbCreds = [
           'db_host' => '127.0.0.1:3306',
           'db_user' => TPO_SERV_LOCAL ? 'root' : 'mitienda_prod',
           'db_password' => TPO_SERV_LOCAL ? '' : 'mitienda031282',
           'db_name' => 'mitienda_Control',
-          'db_charset' => 'utf8mb4',
-        ));
-        $this->setear_bd($this->seleccionarBD());
-      } else {
-        $this->conectar($_SESSION['base']);
+      ];
+
+      // Establece una conexión temporal y no persistente a la BD de control.
+      $controlDb = new mysqli(...array_values($controlDbCreds));
+
+      if ($controlDb->connect_error) {
+          error_log("Error de conexión a la BD de control: " . $controlDb->connect_error);
+          // Si no podemos conectarnos a la BD de control, no podemos continuar.
+          require_once(__DIR__ . '/../../Controllers/Error.php');
+          exit();
       }
 
-      $this->setConfiguracionRegional($_SESSION['base']);
+      $controlDb->set_charset('utf8mb4');
 
-      require_once __DIR__ . '/../../Config/Propiedades.php';
-    }
+      // Se espera que las funciones de Helpers.php estén cargadas.
+      $tenantIdentifier = strtolower(clear_cadena(strClean(BD_SELECT)));
+
+      $sql = "SELECT a.*, b.*
+              FROM clientes a
+              INNER JOIN config_regional b ON a.regionid = b.idregion
+              WHERE a.url_empresa = ?";
+
+      $stmt = $controlDb->prepare($sql);
+      $stmt->bind_param('s', $tenantIdentifier);
+      $stmt->execute();
+      $clientConfig = $stmt->get_result()->fetch_assoc();
+
+      $stmt->close();
+      $controlDb->close();
+
+      if ($clientConfig) {
+          // Si se encuentra la configuración, se guarda en caché por 24 horas si Redis está disponible.
+          if ($cache->isConnected()) {
+              $cache->set($cacheKey, $clientConfig, 86400);
+          }
+          return $clientConfig;
+      }
+
+      // Si no se encuentra la configuración del cliente para el subdominio, se activa un 404.
+      require_once(__DIR__ . '/../../Controllers/Error.php');
+      exit();
   }
 
   private function conectar($credenciales) {
@@ -37,40 +98,10 @@ class Conexion {
     self::$connect->set_charset($credenciales['db_charset']);
   }
 
-  private function setear_bd($nombre_bd) {
-    if (!self::$connect->select_db($nombre_bd)) {
-      exit('Error seleccionando la base de datos');
-    }
-  }
-
   private function propiedadesConect() {
     self::$connect->options(MYSQLI_OPT_INT_AND_FLOAT_NATIVE, 1);
     mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
     self::$connect->set_charset("utf8mb4");
-  }
-
-  private function seleccionarBD() {
-    $sql = "SELECT a.idcte, a.db_host, a.db_name, a.db_user, a.db_password, a.db_charset,
-        b.region, b.region_abrev, b.idioma, b.timezone, b.moneda, b.moneda_formato, b.moneda_simbolo, b.moneda_separador_miles, b.moneda_separador_decimales, b.zona_horaria, b.fecha_formato
-            FROM clientes a
-            INNER JOIN config_regional b ON a.regionid = b.idregion
-            WHERE a.url_empresa = ?";
-
-    $stmt = self::$connect->prepare($sql);
-    $bdSelect = strval(BD_SELECT);
-    $stmt->bind_param('s', $bdSelect);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $row = $result->fetch_assoc();
-
-    if ($row) {
-      $_SESSION['base'] = $row;
-      return $row['db_name'];
-    } else {
-      exit(require_once('./Controllers/Error.php'));
-      session_unset();
-      session_destroy();
-    }
   }
 
   public function getConexion() {
