@@ -52,14 +52,35 @@ function footerTienda(array $data = []): void
  */
 function getModal(string $nameModal, array $data = []): void
 {
-    // Se asume que $data se usará dentro del archivo modal.
     include_once 'Views/Template/Modals/' . $nameModal . '.php';
 }
 
 function getDisplay(string $__DIR__, string $nameModal, array $data = []): void
 {
-    // Se asume que $data se usará dentro del archivo modal.
     include_once $__DIR__ . '/' . $nameModal . '.php';
+}
+
+function getFile(string $rutaDirVista, array $data = []): string
+{
+  ob_start();
+  include 'Views/' . $rutaDirVista . '.php';
+  return ob_get_clean();
+}
+
+/**
+ * Incluye el header del panel de administración.
+ */
+function headerAdmin(array $data = []): void
+{
+  include_once 'Views/Template/admin_header.php';
+}
+
+/**
+ * Incluye el footer del panel de administración.
+ */
+function footerAdmin(array $data = []): void
+{
+  include_once 'Views/Template/admin_footer.php';
 }
 
 // -----------------------------------------------------------------------------
@@ -99,6 +120,14 @@ function clear_cadena(string $cadena): string
     $cadena = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $cadena);
     $cadena = preg_replace('/[^a-z0-9_]+/', '-', $cadena);
     return trim($cadena, '-');
+}
+
+/**
+ * Limpia una cadena y devuelve solo números enteros.
+ */
+function clear_int($param): int
+{
+  return (int) preg_replace('/[^0-9]/', '', $param);
 }
 
 // -----------------------------------------------------------------------------
@@ -381,6 +410,14 @@ function num_par(int $num): bool
 /**
  * Calcula la diferencia porcentual entre dos valores.
  */
+function obtenerPorcentajeDiferencia(int|float $cantidad, int|float $total): int
+{
+  return (int) round((($cantidad * 100) / $total), 0);
+}
+
+/**
+ * Calcula la diferencia porcentual entre dos valores.
+ */
 function calcularPorciento(float $valor1, float $valor2): string
 {
     if ($valor2 == 0) return "0%";
@@ -521,16 +558,16 @@ function uploadImage(array $data_foto, string $namefoto): bool
 function deleteFile(string $name): bool
 {
     $destination = 'uploads/' . FILE_SISTEM_CLIENTE . $name;
-    return file_exists($destination) ? unlink($destination) : true;
+    return !file_exists($destination) || unlink($destination);
 }
 
 function thumbImage(string $dirArchivo, string $nombreFinal, int|float $ancho, int|float $alto, int $calidad = 70): string
 {
+    if (!file_exists($dirArchivo)) return '';
+
     $pathinfo = pathinfo($nombreFinal);
     $extension = strtolower($pathinfo['extension']);
     $thumb = imagecreatetruecolor((int)$ancho, (int)$alto);
-
-    if (!file_exists($dirArchivo)) return '';
 
     $sourceImage = match ($extension) {
         'jpg', 'jpeg' => imagecreatefromjpeg($dirArchivo),
@@ -542,8 +579,7 @@ function thumbImage(string $dirArchivo, string $nombreFinal, int|float $ancho, i
 
     if (!$sourceImage) return '';
 
-    imagecopyresampled($thumb, $sourceImage, 0, 0, 0, 0, (int)$ancho, (int)$alto, imagesx($sourceImage), imagesy($sourceImage));
-    $thumb_file_name = './uploads/' . FILE_SISTEM_CLIENTE . 'thumb_' . $nombreFinal;
+    $thumb_file_name = asisThumbImage($thumb, $sourceImage, (int)$ancho, (int)$alto, $pathinfo['filename'], $extension);
 
     match ($extension) {
         'jpg', 'jpeg' => imagejpeg($thumb, $thumb_file_name, $calidad),
@@ -552,7 +588,18 @@ function thumbImage(string $dirArchivo, string $nombreFinal, int|float $ancho, i
         'webp' => imagewebp($thumb, $thumb_file_name, $calidad),
     };
 
+    imagedestroy($sourceImage);
+    imagedestroy($thumb);
+
     return $thumb_file_name;
+}
+
+function asisThumbImage(GdImage $thumb, GdImage $nuevo, int $ancho, int $alto, string $nombre, string $extension): string
+{
+  $ancho_original = imagesx($nuevo);
+  $alto_original = imagesy($nuevo);
+  imagecopyresampled($thumb, $nuevo, 0, 0, 0, 0, $ancho, $alto, $ancho_original, $alto_original);
+  return './uploads/' . FILE_SISTEM_CLIENTE . 'thumb_' . $nombre . '.' . $extension;
 }
 
 function convertImageToWebP(string $imgArchivo, int $quality = 75): string
@@ -568,6 +615,7 @@ function convertImageToWebP(string $imgArchivo, int $quality = 75): string
     };
     $destination = "./uploads/" . FILE_SISTEM_CLIENTE . $nombre . ".webp";
     imagewebp($image, $destination, $quality);
+    imagedestroy($image);
     return $nombre . ".webp";
 }
 
@@ -584,6 +632,7 @@ function convertImageToJPG(string $imgArchivo, string $nombfinal, int $quality =
     if ($image !== null) {
         $destination = './uploads/' . FILE_SISTEM_CLIENTE . $nombfinal;
         imagejpeg($image, $destination, $quality);
+        imagedestroy($image);
         return $destination;
     }
     return '';
@@ -591,7 +640,7 @@ function convertImageToJPG(string $imgArchivo, string $nombfinal, int $quality =
 
 function img_alto_ancho(string $directorio_foto, int $medida_alto_ancho): array
 {
-    if (!file_exists($directorio_foto)) return [null, null];
+    if (!file_exists($directorio_foto)) return [0, 0];
 
     [$ancho, $alto] = getimagesize($directorio_foto);
     $proporcion = $alto / $ancho;
@@ -599,11 +648,9 @@ function img_alto_ancho(string $directorio_foto, int $medida_alto_ancho): array
     if ($proporcion > 1) { // Imagen vertical
         $alto_max = $medida_alto_ancho;
         $ancho_max = round($alto_max / $proporcion);
-    } elseif ($proporcion < 1) { // Imagen horizontal
+    } else { // Imagen horizontal o cuadrada
         $ancho_max = $medida_alto_ancho;
         $alto_max = round($ancho_max * $proporcion);
-    } else { // Imagen cuadrada
-        $alto_max = $ancho_max = $medida_alto_ancho;
     }
     return [(int)$ancho_max, (int)$alto_max];
 }
@@ -617,10 +664,34 @@ function convertirXlsCSvEnArray(string $inputFileName): array
     return $spreadsheet->getActiveSheet()->toArray();
 }
 
-/**
- * Calcula la diferencia legible entre dos fechas.
- */
-function diferencia_entre_fechas(DateTime $fecha1, DateTime $fecha2): string
+function estadoFoto(string $nombre_foto, string $foto_actual, int|string $foto_remove): string
+{
+    if ($nombre_foto === '' && $foto_remove == 1) {
+        return 'eliminada';
+    }
+    if ($nombre_foto === $foto_actual) {
+        return 'sin_mov';
+    }
+    if ($foto_actual === 'portada_categoria.png') {
+        return $nombre_foto === '' ? 'sin_mov_def' : 'nueva';
+    }
+    return 'actualizada';
+}
+
+function generarCSV(array $arreglo, string $ruta, string $delimitador = ',', string $encapsulador = '"'): void
+{
+    $file_handle = fopen($ruta, 'w');
+    if ($file_handle) {
+        foreach ($arreglo as $linea) {
+            fputcsv($file_handle, $linea, $delimitador, $encapsulador);
+        }
+        fclose($file_handle);
+    } else {
+        error_log("Error al abrir el archivo CSV: " . $ruta);
+    }
+}
+
+function diferencia_entre_fechas(DateTimeInterface $fecha1, DateTimeInterface $fecha2): string
 {
     $intervalo = $fecha1->diff($fecha2);
     $partes = [];
@@ -628,5 +699,61 @@ function diferencia_entre_fechas(DateTime $fecha1, DateTime $fecha2): string
     if ($intervalo->d > 0) $partes[] = $intervalo->d . ' días';
     if ($intervalo->h > 0) $partes[] = $intervalo->h . ' horas';
     if ($intervalo->i > 0) $partes[] = $intervalo->i . ' minutos';
-    return implode(' ', $partes);
+    return implode(' ', $partes) ?: 'ahora';
+}
+
+// -----------------------------------------------------------------------------
+// FUNCIONES DE PAYPAL (requieren constantes no definidas en este archivo)
+// -----------------------------------------------------------------------------
+
+function getTokenPayPal(): ?string
+{
+    if (!defined('URL_API_PAYPAL') || !defined('CLIENTE_PAYPAL') || !defined('SECRET')) {
+        error_log("Constantes de PayPal no definidas.");
+        return null;
+    }
+    $curl = curl_init();
+    curl_setopt_array($curl, [
+        CURLOPT_URL => URL_API_PAYPAL . '/v1/oauth2/token',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_SSL_VERIFYHOST => 2,
+        CURLOPT_SSL_VERIFYPEER => true,
+        CURLOPT_USERPWD => CLIENTE_PAYPAL . ':' . SECRET,
+        CURLOPT_POST => true,
+        CURLOPT_POSTFIELDS => 'grant_type=client_credentials',
+    ]);
+    $result = curl_exec($curl);
+    if (curl_errno($curl)) {
+        error_log('getTokenCURL Error #: ' . curl_error($curl));
+        return null;
+    }
+    curl_close($curl);
+    $decoded = json_decode($result);
+    return $decoded->access_token ?? null;
+}
+
+function curlConection(string $ruta, string $method = 'GET', string $contentType = 'application/x-www-form-urlencoded', ?string $token = null)
+{
+    $arrHeader = ['Content-Type: ' . $contentType];
+    if ($token !== null) {
+        $arrHeader[] = 'Authorization: Bearer ' . $token;
+    }
+
+    $ch = curl_init();
+    curl_setopt_array($ch, [
+        CURLOPT_URL => $ruta,
+        CURLOPT_CUSTOMREQUEST => $method,
+        CURLOPT_SSL_VERIFYPEER => false, // ¡ADVERTENCIA: Inseguro en producción!
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_HTTPHEADER => $arrHeader,
+    ]);
+    $result = curl_exec($ch);
+    $err = curl_error($ch);
+    curl_close($ch);
+
+    if ($err) {
+        error_log('CURL Error #: ' . $err);
+        return 'CURL Error #: ' . $err;
+    }
+    return json_decode($result);
 }
