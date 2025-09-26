@@ -264,15 +264,28 @@ function getUserIP(): string
 /**
  * Detecta el tipo de dispositivo basado en el User Agent.
  */
-function detectar_dispositivo(): string
-{
+function detectar_dispositivo(): string {
     $userAgent = $_SERVER['HTTP_USER_AGENT'] ?? '';
-    $tabletPattern = '/(tablet|ipad|playbook|silk)|(android(?!.*mobile))/i';
-    $mobilePattern = '/(mobi|ip(hone|od)|adroid|opera m(ob|in)i|windows (phone|ce)|blackberry|s(ymbian|eries60|amsung)|p(alm|rofile/midp|laystation portable)|nokia|fennec|htc[-_]?|up\.browser|up\.link|vodafone|philips|series80|alcatel|amoi|ktouch|nexian|samsung|sprint|zte|kddi|softbank|docomo|sanyo|sharp|tsm|minimo|audiovox|motorola|mmp|sagem|wap-)|(symbianos|palm os|ipod|blackberry|opera mini|windows ce|nokia|fennec|hiptop|kindle|p(alm|rofile/midp|ocket|o)|s(60|amsung|cr)|w(ebos|ap|es))/i';
 
-    if (preg_match($tabletPattern, $userAgent)) return 'tablet';
-    if (preg_match($mobilePattern, $userAgent)) return 'mobile';
-    return 'desktop';
+    // Cambiado el delimitador de / a ~ para evitar conflictos con rutas o nombres internos.
+    $tabletPattern = '~(tablet|ipad|playbook|silk)|(android(?!.*mobile))~i';
+    
+    // Cambiado el delimitador de / a ~
+    $mobilePattern = '~(mobi|ip(hone|od)|adroid|opera m(ob|in)i|windows (phone|ce)|blackberry|s(ymbian|eries60|amsung)|p(alm|rofile/midp|laystation portable)|nokia|fennec|htc[-_]?|up\.browser|up\.link|vodafone|philips|series80|alcatel|amoi|ktouch|nexian|samsung|sprint|zte|kddi|softbank|docomo|sanyo|sharp|tsm|minimo|audiovox|motorola|mmp|sagem|wap-)|(symbianos|palm os|ipod|blackberry|opera mini|windows ce|nokia|fennec|hiptop|kindle|p(alm|rofile/midp|ocket|o)|s(60|amsung|cr)|w(ebos|ap|es))~i';
+    
+    $desktopPattern = '/Linux|Windows|Macintosh|Ubuntu/'; // No necesita cambio ya que no contiene /
+
+    if (preg_match($tabletPattern, $userAgent)) {
+        return 'tablet';
+    }
+    if (preg_match($mobilePattern, $userAgent)) {
+        return 'mobile';
+    }
+    if (preg_match($desktopPattern, $userAgent)) {
+        return 'desktop';
+    }
+
+    return 'Other';
 }
 
 /**
@@ -756,4 +769,82 @@ function curlConection(string $ruta, string $method = 'GET', string $contentType
         return 'CURL Error #: ' . $err;
     }
     return json_decode($result);
+}
+
+
+
+
+
+/**
+ * Devuelve la cantidad de dígitos de un número entero.
+ *
+ * @param int $n Número entero.
+ * @return int Cantidad de dígitos.
+ */
+function int_len(int $n): int {
+  return strlen(strval($n));
+}
+
+/**
+ * Verifica si una oferta está activa (versión mejorada).
+ *
+ * @param array $data_articulo Datos del artículo.
+ * @return bool True si la oferta está activa, false en caso contrario.
+ */
+function ofertaArtiva(array $data_articulo): bool {
+  $fecha_actual = new DateTime('now');
+  $fecha_ini = $data_articulo['oferta_f_ini'] ? new DateTime($data_articulo['oferta_f_ini']) : null;
+  $fecha_fin = $data_articulo['oferta_f_fin'] ? new DateTime($data_articulo['oferta_f_fin']) : (new DateTime())->add(new DateInterval('PT1H')); // Sumar una hora si no hay fecha fin
+
+  return $data_articulo['oferta'] > 0 && $fecha_ini <= $fecha_actual && $fecha_fin >= $fecha_actual;
+}
+
+/**
+hace una instancia de la clase Error.php y genera una vista Error XXX
+ */
+function showError($mensaje) {
+    // Incluye el controlador y la vista de error
+    require_once __DIR__ . '/../Controllers/Error.php'; // Ajusta la ruta si es necesario
+    $errorController = new Error();
+    $errorController->index($mensaje); // Llama a un método en el controlador de error para mostrar la vista
+}
+
+/**
+ * Convierte una imagen a otro formato (JPG o WebP).
+ *
+ * @param string $sourcePath Ruta del archivo de imagen de origen.
+ * @param string $destinationPath Ruta del archivo de imagen de destino.
+ * @param string $format Formato de la imagen de destino ('jpg' o 'webp').
+ * @param int $quality Calidad de la imagen (0-100).
+ * @return bool True si la conversión fue exitosa, false en caso contrario.
+ */
+function convertImage(string $sourcePath, string $destinationPath, string $format = 'webp', int $quality = 80): bool {
+  if (!file_exists($sourcePath)) {
+    return false;
+  }
+
+  $imageInfo = getimagesize($sourcePath);
+  if (!$imageInfo) {
+    return false;
+  }
+
+  $image = match ($imageInfo[2]) {
+    IMAGETYPE_JPEG => imagecreatefromjpeg($sourcePath),
+    IMAGETYPE_PNG => imagecreatefrompng($sourcePath),
+    IMAGETYPE_GIF => imagecreatefromgif($sourcePath),
+    default => null, // Retornar null si el tipo no es soportado
+  };
+
+  if ($image === null) { // Verificar si se creó la imagen correctamente
+    return false;
+  }
+
+  $success = match ($format) {
+    'jpg', 'jpeg' => imagejpeg($image, $destinationPath, $quality),
+    'webp' => imagewebp($image, $destinationPath, $quality),
+    default => false, // Manejar formatos no soportados
+  };
+
+  imagedestroy($image);
+  return $success;
 }
