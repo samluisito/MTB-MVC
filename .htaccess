@@ -1,86 +1,148 @@
-# === MEJORAS DE SEGURIDAD Y CONFIGURACIÓN GENERAL ===
-# Deshabilitar el listado de directorios para mayor seguridad.
-Options -Indexes
-# Seguir enlaces simbólicos (necesario para que mod_rewrite funcione).
-Options +FollowSymLinks
-
-# === COMPRESIÓN (mod_deflate) ===
-# Comprime los tipos de archivo más comunes para acelerar la carga del sitio.
 <IfModule mod_deflate.c>
-  AddOutputFilterByType DEFLATE application/javascript
-  AddOutputFilterByType DEFLATE application/json
-  AddOutputFilterByType DEFLATE application/rss+xml
-  AddOutputFilterByType DEFLATE application/vnd.ms-fontobject
-  AddOutputFilterByType DEFLATE application/x-font
-  AddOutputFilterByType DEFLATE application/x-font-opentype
-  AddOutputFilterByType DEFLATE application/x-font-truetype
-  AddOutputFilterByType DEFLATE application/x-font-ttf
-  AddOutputFilterByType DEFLATE application/x-javascript
-  AddOutputFilterByType DEFLATE font/opentype
-  AddOutputFilterByType DEFLATE font/truetype
-  AddOutputFilterByType DEFLATE image/svg+xml
-  AddOutputFilterByType DEFLATE image/x-icon
-  AddOutputFilterByType DEFLATE text/css
-  AddOutputFilterByType DEFLATE text/html
-  AddOutputFilterByType DEFLATE text/javascript
-  AddOutputFilterByType DEFLATE text/plain
-  AddOutputFilterByType DEFLATE text/xml
+  # Habilitar la compresión de archivos
+  SetOutputFilter DEFLATE
 </IfModule>
-
-# === CACHÉ DEL NAVEGADOR (mod_expires) ===
-# Define por cuánto tiempo el navegador debe cachear los diferentes tipos de archivos.
 <IfModule mod_expires.c>
+  # Cacheo de archivos de imagen, CSS y JavaScript
   ExpiresActive On
-  ExpiresDefault                              "access plus 1 month"
-  # No cachear documentos dinámicos y de datos
-  ExpiresByType text/html                     "access plus 0 seconds"
-  ExpiresByType text/xml                      "access plus 0 seconds"
-  ExpiresByType application/xml               "access plus 0 seconds"
-  ExpiresByType application/json              "access plus 0 seconds"
-  # Feeds
-  ExpiresByType application/rss+xml           "access plus 1 hour"
-  ExpiresByType application/atom+xml          "access plus 1 hour"
-  # Favicon
-  ExpiresByType image/x-icon                  "access plus 1 week"
-  # Archivos multimedia
-  ExpiresByType image/gif                     "access plus 1 month"
-  ExpiresByType image/png                     "access plus 1 month"
-  ExpiresByType image/jpeg                    "access plus 1 month"
-  ExpiresByType image/webp                    "access plus 1 month"
-  ExpiresByType video/ogg                     "access plus 1 month"
-  ExpiresByType audio/ogg                     "access plus 1 month"
-  ExpiresByType video/mp4                     "access plus 1 month"
-  ExpiresByType video/webm                    "access plus 1 month"
-  # CSS, JavaScript y Fuentes se cachean por más tiempo
-  ExpiresByType text/css                      "access plus 1 year"
-  ExpiresByType application/javascript        "access plus 1 year"
-  ExpiresByType font/opentype                 "access plus 1 year"
-  ExpiresByType font/truetype                 "access plus 1 year"
-  ExpiresByType font/woff                     "access plus 1 year"
-  ExpiresByType font/woff2                    "access plus 1 year"
+  ExpiresByType image/* "access plus 1 month"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType text/javascript "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType application/x-javascript "access plus 1 month"
 </IfModule>
-
-# === REGLAS DE REESCRITURA (mod_rewrite) ===
-# Habilitar el motor de reescritura de URLs.
+<IfModule mod_headers.c>
+  # Desactivar ETags para mejorar el rendimiento de la cache
+  Header unset ETag
+  FileETag None
+  # Configuración del cacheo del navegador
+  <FilesMatch "\.(jpg|jpeg|png|webp|gif|swf|ico|js|css|ttf|woff2)$">
+    Header set Cache-Control "max-age=31536000, public"
+  </FilesMatch>
+  <Files "index.php">
+      Header set Cache-Control "max-age=3600, public"
+  </Files>
+</IfModule>
 <IfModule mod_rewrite.c>
+  # Configuración de seguridad
+Options +FollowSymLinks
   RewriteEngine On
-
-  # --- CONFIGURACIÓN DE ERRORES PARA DESARROLLO ---
-  # ADVERTENCIA: Estas directivas deben ser eliminadas o comentadas en un entorno de producción.
+  # No permitir la navegación por las carpetas del servidor
+  # Activar la opción de mostrar errores de PHP en el navegador
   php_flag display_errors on
+  # Activar la opción de reportar y mostrar todos los errores de PHP
   php_flag display_startup_errors on
   php_value error_reporting -1
-
-  # Redirige todas las solicitudes a archivos o directorios que no existen al controlador frontal (index.php).
-  # Este es el patrón estándar para frameworks MVC.
+  # Opciones para mejorar la velocidad y eficiencia
+  # Denegar acceso si la URL no corresponde a un archivo o carpeta existente
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_FILENAME} !-f
+  # Crear variable en $_GET con la url despues del dominio
   RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+  # Eliminación de las extensiones de archivos .php de la URL
+  RewriteCond %{REQUEST_FILENAME}\.php -f
+  RewriteRule ^(.*)$ $1.php [NC,L]
+</IfModule>
+# BEGIN directivas php ini generadas por cPanel, no editar
+# La edición manual de este archivo puede provocar un comportamiento inesperado.
+# Para realizar cambios en este archivo, use el editor MultiPHP INI de cPanel (Inicio >> Software >> Editor MultiPHP INI)
+# Para obtener más ianformación, lea nuestra documentación (https://go.cpanel.net/EA4ModifyINI)
+<IfModule php8_module>
+   php_flag display_errors On
+   php_value max_execution_time 9000
+   php_value max_input_time 9000
+   php_value max_input_vars 1000
+   php_value memory_limit 1024M
+   php_value post_max_size 30M
+   php_value session.gc_maxlifetime 259200000
+   php_value session.save_path "/var/cpanel/php/sessions/ea-php56"
+   php_value upload_max_filesize 30M
+   php_flag zlib.output_compression On
+</IfModule>
+<IfModule lsapi_module>
+   php_flag display_errors On
+   php_value max_execution_time 9000
+   php_value max_input_time 9000
+   php_value max_input_vars 1000
+   php_value memory_limit 1024M
+   php_value post_max_size 30M
+   php_value session.gc_maxlifetime 259200000
+   php_value session.save_path "/var/cpanel/php/sessions/ea-php56"
+   php_value upload_max_filesize 30M
+   php_flag zlib.output_compression On
+</IfModule>
+# FIN de las directivas php ini generadas por cPanel, no editar
+# php -- BEGIN manejador generado por cPanel, no editar
+# Configure el paquete "alt-php81" como el lenguaje de programación "PHP" predeterminado.
+<IfModule mime_module>
+  AddHandler application/x-httpd-alt-php81___lsphp .php .php8 .phtml
+</IfModule>
+# php -- FIN del controlador generado por cPanel, no editar
 
-  # --- Regla para eliminar la extensión .php (comentada) ---
-  # Esta regla está comentada porque la regla anterior con la bandera [L] (Last)
-  # impide que se ejecute. Si se necesita, debe ser re-evaluada y colocada correctamente.
-  # RewriteCond %{REQUEST_FILENAME}\.php -f
-  # RewriteRule ^(.*)$ $1.php [NC,L]
+# BEGIN cPanel-generated php ini directives, do not edit
+# Manual editing of this file may result in unexpected behavior.
+# To make changes to this file, use the cPanel MultiPHP INI Editor (Home >> Software >> MultiPHP INI Editor)
+# For more information, read our documentation (https://go.cpanel.net/EA4ModifyINI)
+<IfModule php8_module>
+   php_flag display_errors On
+   php_value max_execution_time 9000
+   php_value max_input_time 9000
+   php_value max_input_vars 1000
+   php_value memory_limit 1024M
+   php_value post_max_size 30M
+   php_value session.gc_maxlifetime 259200000
+   php_value session.save_path "/opt/alt/php82/var/lib/php/session"
+   php_value upload_max_filesize 30M
+   php_flag zlib.output_compression On
+</IfModule>
+<IfModule lsapi_module>
+   php_flag display_errors On
+   php_value max_execution_time 9000
+   php_value max_input_time 9000
+   php_value max_input_vars 1000
+   php_value memory_limit 1024M
+   php_value post_max_size 30M
+   php_value session.gc_maxlifetime 259200000
+   php_value session.save_path "/opt/alt/php82/var/lib/php/session"
+   php_value upload_max_filesize 30M
+   php_flag zlib.output_compression On
+</IfModule>
+# END cPanel-generated php ini directives, do not edit
 
+# php -- BEGIN cPanel-generated handler, do not edit
+# Set the “alt-php82” package as the default “PHP” programming language.
+<IfModule mime_module>
+  AddHandler application/x-httpd-alt-php82 .php .php8 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit
+
+
+<IfModule pagespeed_module>
+  ModPagespeed on
+  # Habilitar filtros de optimización
+  ModPagespeedEnableFilters combine_css,combine_javascript,convert_jpeg_to_progressive,resize_images
+
+  # Habilitar caché de recursos
+  ModPagespeedFetchHttps enable
+  ModPagespeedInheritVHostConfig on
+  ModPagespeedRewriteLevel PassThrough
+
+  # Configuraciones adicionales
+  ModPagespeedFileCachePath /var/cache/mod_pagespeed/
+  ModPagespeedFileCacheInodeLimit 500000
+  ModPagespeedFileCacheSizeKb 1024000
+
+  # Configuración de cabeceras de respuesta
+  <Location /pagespeed_admin>
+    Order allow,deny
+    Allow from all
+    SetHandler pagespeed_admin
+  </Location>
+
+  # Configuración de cabeceras de respuesta para bypassing cache
+  <Location /pagespeed_global_admin>
+    Order allow,deny
+    Allow from all
+    SetHandler pagespeed_global_admin
+  </Location>
 </IfModule>

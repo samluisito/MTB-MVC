@@ -1,31 +1,25 @@
 <?php
 
-declare(strict_types=1);
+/* Este código busca el archivo del controlador,
+ * verifica si existe y luego crea una instancia del controlador.
+ * A continuación, verifica si el método existe y lo ejecuta con los parámetros dados,
+ * o muestra una página de error si el método no existe. */
+// Ruta del archivo del controlador
+$controllerFile = __DIR__ . '/../../Controllers/' . ucwords($controller) . '.php';
 
-/**
- * Este script maneja la lógica de enrutamiento principal. Carga el controlador
- * apropiado y ejecuta el método solicitado según las variables de la URL
- * definidas en index.php.
- */
-
-$controllerName = ucwords($controller);
-$controllerFile = __DIR__ . '/../../Controllers/' . $controllerName . '.php';
-
+// Verifica si el archivo del controlador existe
 if (file_exists($controllerFile)) {
-    require_once $controllerFile;
-    // La variable original $controller (un string) ahora se reemplaza por la instancia del objeto.
-    $controller = new $controllerName();
 
-    if (method_exists($controller, $method)) {
-        // El método solicitado existe, así que lo llamamos con los parámetros.
-        $controller->{$method}($params);
-    } else {
-        // El método no existe, así que mostramos una página de error 404.
-        // Se espera que el archivo Error.php se autoejecute.
-        require_once __DIR__ . '/../../Controllers/Error.php';
-    }
+  // Requiere el archivo del controlador
+  require_once $controllerFile;
+
+  // Crea una instancia del controlador
+  $controller = new $controller();
+
+  // Verifica si el método existe y lo ejecuta con los parámetros dados
+  method_exists($controller, $method) ? $controller->{$method}($params) : require('Controllers/Error.php');
+
 } else {
-    // El archivo del controlador no existe, así que mostramos una página de error 404.
-    // Se espera que el archivo Error.php se autoejecute.
-    require_once __DIR__ . '/../../Controllers/Error.php';
+  // Si el archivo del controlador no existe, muestra la página de error
+  require_once __DIR__ . '/../../Controllers/Error.php';
 }
