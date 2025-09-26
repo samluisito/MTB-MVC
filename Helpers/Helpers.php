@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 /*
 |--------------------------------------------------------------------------
-| Funciones de Ayuda Globales (Helpers)
+| Funciones de Ayuda Globales (Helpers)v
 |--------------------------------------------------------------------------
 |
 | Este archivo contiene un conjunto de funciones de ayuda de propósito general
