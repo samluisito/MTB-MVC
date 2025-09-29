@@ -40,5 +40,5 @@ define('BASE_CLIENTE', '/');
 define('FILE_SISTEM_CLIENTE', $bdselect . '/');
 
  
-include 'Propiedades.php';
+//include 'Propiedades.php';
 
