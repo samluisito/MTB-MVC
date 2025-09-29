@@ -8,8 +8,10 @@ class Mysql extends Conexion {
   protected $conexion;
 
   function __construct() {
-    $this->conexion = new Conexion(); //solicitamos la conexion a la base de datos. la cual ase auto ejecura en el constructor.
-    $this->conexion = $this->conexion->connect;
+    // Llama al constructor padre para asegurar que la conexión estática se establezca.
+    parent::__construct();
+    // Asigna el objeto de conexión estático a la propiedad local para su uso en los métodos de esta clase.
+    $this->conexion = $this->getConexion();
   }
 
   /* Metodo con php >8.1 */
