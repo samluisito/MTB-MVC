@@ -58,13 +58,19 @@ if (count($arrUrl) > 2) {
 |--------------------------------------------------------------------------
 */
 $host = $_SERVER['HTTP_HOST'];
-$hostParts = explode('.', $host);
 
+// La detección del entorno local ahora es más robusta para soportar subdominios locales.
+// Comprueba si el host es 'localhost', una IP local, o si termina en '.localhost'.
+$isLocal = ($host === 'localhost'
+    || str_starts_with($host, '127.0.0.1')
+    || str_starts_with($host, '192.')
+    || str_ends_with($host, '.localhost')
+);
+
+$hostParts = explode('.', $host);
 if (count($hostParts) > 2 && $hostParts[0] === 'www') {
     array_shift($hostParts);
 }
-
-$isLocal = preg_match('/^(127\.|192\.|localhost$)/', $hostParts[0] ?? '');
 
 if ($isLocal) {
     $requestUriParts = explode('/', $_SERVER['REQUEST_URI']);
@@ -72,10 +78,15 @@ if ($isLocal) {
 
     define('TPO_SERV_LOCAL', 1);
     define('BASE_URL', $_SERVER['REQUEST_SCHEME'] . '://' . $host . '/' . $rootFolder);
-    $tenantIdentifier = 'mitiendabit';
+
+    // En local, el identificador del inquilino puede ser el subdominio o un valor por defecto.
+    // Si es 'localhost' sin subdominio, o solo una IP, usamos 'mitiendabit'.
+    $tenantIdentifier = (count($hostParts) > 1 && $hostParts[0] !== 'localhost') ? $hostParts[0] : 'mitiendabit';
+
 } else {
     define('TPO_SERV_LOCAL', 0);
     define('BASE_URL', $_SERVER['REQUEST_SCHEME'] . '://' . $host);
+    // En producción, el subdominio es el identificador del inquilino.
     $tenantIdentifier = $hostParts[0];
 }
 
