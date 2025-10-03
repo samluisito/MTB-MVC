@@ -2,8 +2,23 @@
 
 declare(strict_types=1);
 
+/**
+ * --------------------------------------------------------------------------
+ * Front Controller
+ * --------------------------------------------------------------------------
+ *
+ * Este archivo es el único punto de entrada para todas las solicitudes a la
+ * aplicación. Se encarga de inicializar el entorno, parsear la URL y
+ * delegar el control al script de carga principal que manejará el enrutamiento.
+ *
+ * @version 1.4.0
+ * @author Jules
+ */
+
 // Define el tiempo de inicio para la depuración del rendimiento.
-define('TIME_INI', microtime(true));
+if (!defined('TIME_INI')) {
+    define('TIME_INI', microtime(true));
+}
 
 // Inicia la sesión si no está ya activa.
 if (session_status() === PHP_SESSION_NONE) {
@@ -11,108 +26,92 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// --- FUNCIONES DE DEPURACIÓN ---
+/*
+|--------------------------------------------------------------------------
+| Carga de Archivos del Núcleo
+|--------------------------------------------------------------------------
+*/
+require_once __DIR__ . '/Helpers/Helpers.php';
+require_once __DIR__ . '/Librerias/Core/Autoload.php';
+require_once __DIR__ . '/Librerias/Core/Load.php';
 
-/**
- * Función de utilidad para depuración de variables.
- * Imprime el contenido de una variable de forma legible.
- *
- * @param mixed $data Los datos a mostrar.
- * @param bool  $json Si se debe mostrar la salida como JSON.
- */
-function dep($data, bool $json = false): void
-{
-    $trace = debug_backtrace();
-    $file = str_replace($_SERVER['DOCUMENT_ROOT'] ?? '', '', $trace[0]['file']);
-    $line = $trace[0]['line'];
-    echo '<pre><br><b>';
-    if ($json) {
-        echo json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-    } else {
-        echo print_r($data, true);
-    }
-    echo '</b>';
-    echo '<br>Archivo: ' . $file . ' - Línea: ' . $line;
-    echo '<hr></pre>';
-}
-
-/**
- * Función de utilidad para medir tiempos de ejecución entre puntos del código.
- *
- * @param array|null $arr_dep_time Un array opcional con el tiempo anterior para calcular la diferencia.
- * @return array Devuelve un array con el tiempo actual, el archivo y la línea.
- */
-function dep_time(?array $arr_dep_time = null): array
-{
-    $trace = debug_backtrace();
-    $pos = isset($trace[1]['file']) ? 0 : 0;
-    $file = str_ireplace('/opt/lampp/htdocs/mitiendabit', '', $trace[$pos]['file']);
-    $line = $trace[$pos]['line'];
-    $time = round(microtime(true) - TIME_INI, 6);
-
-    echo '<pre>';
-    if ($arr_dep_time === null) {
-        echo "{$time} - time<br>";
-        echo "Archivo: {$file} - línea {$line}";
-    } else if (is_array($arr_dep_time)) {
-        $diferencia = $time - $arr_dep_time[0];
-        echo "{$diferencia} - time entre línea {$arr_dep_time[2]} y {$line}<br>";
-        echo "{$time} - time total <br>";
-        echo "Archivo: {$file} - línea {$line}";
-    }
-    echo '<hr></pre>';
-
-    return [$time, $file, $line];
-}
-
-
-// --- PARSEO DE URL Y ENRUTAMIENTO ---
+/*
+|--------------------------------------------------------------------------
+| Parseo de la URL
+|--------------------------------------------------------------------------
+*/
 $url = $_GET['url'] ?? 'home/home';
-$arrUrl = explode('/', $url);
-$controller = $arrUrl[0];
-$method = $arrUrl[1] ?? $controller;
-$method = ($method === '') ? $controller : $method;
+$arrUrl = explode('/', rtrim($url, '/'));
+
+$controllerName = $arrUrl[0] ?: 'home';
+$methodName = $arrUrl[1] ?? $controllerName;
+$methodName = $methodName === '' ? $controllerName : $methodName;
+
 $params = '';
 if (count($arrUrl) > 2) {
     $params = implode(',', array_slice($arrUrl, 2));
 }
 
-// --- CONFIGURACIÓN DE ENTORNO Y URL BASE ---
-$localhost = $_SERVER['HTTP_HOST'];
-$arrHost = explode('.', $localhost);
+/*
+|--------------------------------------------------------------------------
+| Configuración de Entorno y Selección de Inquilino (Tenant)
+|--------------------------------------------------------------------------
+*/
+$host = $_SERVER['HTTP_HOST'];
+$hostParts = explode('.', $host);
 
-if ($arrHost[0] === 'www') {
-    array_shift($arrHost);
+if (count($hostParts) > 2 && $hostParts[0] === 'www') {
+    array_shift($hostParts);
 }
 
-// Determina si se ejecuta en un servidor local y define las constantes correspondientes.
-$isLocal = preg_match('/^(127\.|192\.|localhost$)/', $arrHost[0] ?? '');
+$isLocal = preg_match('/^(127\.|192\.|localhost$)/', $hostParts[0] ?? '');
+
 if ($isLocal) {
-    $carp_raiz = explode('/', $_SERVER['REQUEST_URI'])[1];
+    $requestUriParts = explode('/', $_SERVER['REQUEST_URI']);
+    $rootFolder = $requestUriParts[1] ?? '';
+
     define('TPO_SERV_LOCAL', 1);
-    define('BASE_URL', $_SERVER['REQUEST_SCHEME'] . '://' . $localhost . '/' . $carp_raiz);
+    define('BASE_URL', $_SERVER['REQUEST_SCHEME'] . '://' . $host . '/' . $rootFolder);
+    $tenantIdentifier = 'mitiendabit';
 } else {
     define('TPO_SERV_LOCAL', 0);
-    define('BASE_URL', $_SERVER['REQUEST_SCHEME'] . '://' . $localhost);
+    define('BASE_URL', $_SERVER['REQUEST_SCHEME'] . '://' . $host);
+    $tenantIdentifier = $hostParts[0];
 }
 
-// --- SELECCIÓN DE BASE DE DATOS MULTI-INQUILINO ---
-$bdselect = TPO_SERV_LOCAL ? 'mitiendabit' : $arrHost[0];
-define('BD_SELECT', strtolower($bdselect));
+define('BD_SELECT', strtolower($tenantIdentifier));
 define('BASE_CLIENTE', '/');
 
-// --- CARGA DE ARCHIVOS DEL NÚCLEO ---
-// El orden de estos require es importante para el arranque de la aplicación.
-require_once __DIR__ . '/Helpers/Helpers.php';
-require_once __DIR__ . '/Librerias/Core/Autoload.php';
-require_once __DIR__ . '/Librerias/Core/Load.php';
+/*
+|--------------------------------------------------------------------------
+| Inicialización y Cierre de la Conexión a la Base de Datos
+|--------------------------------------------------------------------------
+*/
+// Se instancia la clase `Conexion` para establecer la conexión a la BD.
+new Conexion();
 
-/**
- * NOTA IMPORTANTE: La siguiente línea, aunque parezca extraña, es el mecanismo que
- * desencadena la ejecución de toda la aplicación. El script `Load.php` sobreescribe
- * la variable `$controller` (que es un string) con una instancia del objeto controlador.
- * Al llamar a `getModel()` en esa instancia, se desencadena la creación del modelo
- * y, a su vez, la conexión a la base de datos.
- * NO ELIMINAR esta línea sin refactorizar completamente el ciclo de vida de la solicitud.
- */
-($controller->getModel()->getConexion()->close());
+// Se registra una función para cerrar la conexión al final del script.
+register_shutdown_function(function () {
+    $conexion = new Conexion(); // No creará una nueva conexión gracias al patrón Singleton.
+    $connection = $conexion->getConexion();
+    if ($connection instanceof mysqli && $connection->thread_id) {
+        $connection->close();
+    }
+});
+
+/*
+|--------------------------------------------------------------------------
+| Arranque de la Aplicación
+|--------------------------------------------------------------------------
+*/
+$controller = loadController($controllerName);
+
+if ($controller === null || !method_exists($controller, $methodName)) {
+    // Si el controlador o el método no existen, se carga el script de error
+    // que se encarga de mostrar la página 404 y finalizar la ejecución.
+    require_once __DIR__ . '/Controllers/Error.php';
+    exit();
+}
+
+// Se ejecuta el método del controlador con los parámetros.
+$controller->{$methodName}($params);

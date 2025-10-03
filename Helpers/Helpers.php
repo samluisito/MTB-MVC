@@ -704,14 +704,25 @@ function generarCSV(array $arreglo, string $ruta, string $delimitador = ',', str
     }
 }
 
-function diferencia_entre_fechas(DateTimeInterface $fecha1, DateTimeInterface $fecha2): string
+function diferencia_entre_fechas(DateTimeInterface $fecha1, DateTimeInterface|string $fecha2): string
 {
+    try {
+        // Asegura que el segundo argumento sea un objeto DateTimeInterface para la comparación.
+        if (!$fecha2 instanceof DateTimeInterface) {
+            $fecha2 = new DateTimeImmutable($fecha2);
+        }
+    } catch (Exception $e) {
+        error_log('Error al parsear la fecha en diferencia_entre_fechas: ' . $e->getMessage());
+        return 'fecha inválida';
+    }
+
     $intervalo = $fecha1->diff($fecha2);
     $partes = [];
     if ($intervalo->m > 0) $partes[] = $intervalo->m . ' meses';
     if ($intervalo->d > 0) $partes[] = $intervalo->d . ' días';
     if ($intervalo->h > 0) $partes[] = $intervalo->h . ' horas';
     if ($intervalo->i > 0) $partes[] = $intervalo->i . ' minutos';
+
     return implode(' ', $partes) ?: 'ahora';
 }
 
@@ -851,4 +862,58 @@ function convertImage(string $sourcePath, string $destinationPath, string $forma
 
   imagedestroy($image);
   return $success;
+}
+
+// --- FUNCIONES DE DEPURACIÓN ---
+
+/**
+ * Función de utilidad para depuración de variables.
+ * Imprime el contenido de una variable de forma legible.
+ *
+ * @param mixed $data Los datos a mostrar.
+ * @param bool  $json Si se debe mostrar la salida como JSON.
+ */
+function dep(mixed $data, bool $json = false): void
+{
+    $trace = debug_backtrace();
+    $file = str_replace($_SERVER['DOCUMENT_ROOT'] ?? '', '', $trace[0]['file']);
+    $line = $trace[0]['line'];
+    echo '<pre><br><b>';
+    if ($json) {
+        echo json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    } else {
+        echo print_r($data, true);
+    }
+    echo '</b>';
+    echo '<br>Archivo: ' . $file . ' - Línea: ' . $line;
+    echo '<hr></pre>';
+}
+
+/**
+ * Función de utilidad para medir tiempos de ejecución entre puntos del código.
+ *
+ * @param array|null $arr_dep_time Un array opcional con el tiempo anterior para calcular la diferencia.
+ * @return array Devuelve un array con el tiempo actual, el archivo y la línea.
+ */
+function dep_time(?array $arr_dep_time = null): array
+{
+    $trace = debug_backtrace();
+    $pos = isset($trace[1]['file']) ? 0 : 0;
+    $file = str_ireplace('/opt/lampp/htdocs/mitiendabit', '', $trace[$pos]['file']);
+    $line = $trace[$pos]['line'];
+    $time = round(microtime(true) - (defined('TIME_INI') ? TIME_INI : 0), 6);
+
+    echo '<pre>';
+    if ($arr_dep_time === null) {
+        echo "{$time} - time<br>";
+        echo "Archivo: {$file} - línea {$line}";
+    } else if (is_array($arr_dep_time)) {
+        $diferencia = $time - $arr_dep_time[0];
+        echo "{$diferencia} - time entre línea {$arr_dep_time[2]} y {$line}<br>";
+        echo "{$time} - time total <br>";
+        echo "Archivo: {$file} - línea {$line}";
+    }
+    echo '<hr></pre>';
+
+    return [$time, $file, $line];
 }
