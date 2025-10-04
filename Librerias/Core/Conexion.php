@@ -2,21 +2,16 @@
 
 declare(strict_types=1);
 
-require_once __DIR__ . '/RedisCache.php';
+namespace App\Librerias\Core;
+
+use mysqli;
+
+// La carga de RedisCache ahora será gestionada por el autoloader de Composer.
 
 /**
  * Gestiona la conexión a la base de datos para un entorno multi-inquilino.
  *
- * Esta clase implementa un patrón Singleton para garantizar una única conexión
- * a la base de datos por solicitud. Primero se conecta a una base de datos
- * de "control" para validar el subdominio (inquilino) y obtener sus
- * credenciales de base de datos, que luego se utilizan para establecer la
- * conexión principal de la aplicación.
- *
- * La configuración del inquilino se almacena en caché (Redis) para mejorar
- * el rendimiento en solicitudes posteriores.
- *
- * @version 2.0.1
+ * @version 2.1.0
  * @author Jules
  */
 class Conexion

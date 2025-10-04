@@ -1,43 +1,50 @@
 <?php
+
 declare(strict_types=1);
-require_once('Models/TContacto.php');   // incluimos el archivo con los metodos trait, asi podemos ejecutar mas de una erencia en el controlador 
-require_once("Models/TCategoria.php");    // incluimos el archivo con los metodos trait, asi podemos ejecutar mas de una erencia en el controlador 
 
-class EnConstruccion extends Controllers {
+namespace App\Controllers;
 
-  use TCategoria,
-      TContacto; //llama al uso de metodos de trait
+use App\Librerias\Core\Controllers;
+use App\Models\TContacto;
+use App\Models\TCategoria;
 
-  public function __construct() {
-    parent::__construct();
-  }
+class EnConstruccion extends Controllers
+{
+    use TCategoria;
+    use TContacto;
 
-  public function EnConstruccion() {
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
-    $data["empresa"] = $_SESSION['info_empresa'];
-    $data['page_name'] = 'enConstruccion';
-    $data['page_title'] = $data['page_name'];
-    $data['logo_desktop'] = $empresa['url_logoMenu'];
-    $data['shortcut_icon'] = $empresa['url_shortcutIcon'];
+    public function enConstruccion()
+    {
+        $empresa = $_SESSION['info_empresa'];
+        $data["empresa"] = $empresa;
+        $data['page_name'] = 'enConstruccion';
+        $data['page_title'] = $data['page_name'];
+        $data['logo_desktop'] = $empresa['url_logoMenu'];
+        $data['shortcut_icon'] = $empresa['url_shortcutIcon'];
 
-    $meta = $data["empresa"];
+        $meta = $data["empresa"];
 
-    $data['meta'] = array(
-      'robots' => 'noindex, nofollow, noarchive',
-      'title' => $meta['nombre_comercial'],
-      'description' => substr(strClean(strip_tags($meta['descripcion'])), 0, 160),
-      'keywords' => $meta['tags'],
-      'url' => base_url(),
-      'image' => $meta['url_logoImpreso'],
-      'image:type' => explode('.', $meta['logo_imp'])[1],
-      'og:type' => 'website'
-    );
+        $data['meta'] = [
+            'robots' => 'noindex, nofollow, noarchive',
+            'title' => $meta['nombre_comercial'],
+            'description' => substr(strClean(strip_tags($meta['descripcion'])), 0, 160),
+            'keywords' => $meta['tags'],
+            'url' => base_url(),
+            'image' => $meta['url_logoImpreso'],
+            'image:type' => 'image/' . pathinfo($meta['logo_imp'], PATHINFO_EXTENSION),
+            'og:type' => 'website'
+        ];
 
-    $data['footer_cat'] = $this->getCategoriasFooterT();
+        $data['footer_cat'] = $this->getCategoriasFooterT();
 
-    $data["page_css"] = array('simplyCountdown.min.css');
-    $data["page_functions_js"] = array('plugins/simplyCountdown.min.js', 'functions_enConstruccion.js');
-    $this->views->getView("EnConstruccion", $data);
-  }
+        $data["page_css"] = ['simplyCountdown.min.css'];
+        $data["page_functions_js"] = ['plugins/simplyCountdown.min.js', 'functions_enConstruccion.js'];
 
+        $this->views->getView("EnConstruccion", $data);
+    }
 }

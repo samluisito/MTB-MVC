@@ -2,49 +2,55 @@
 
 declare(strict_types=1);
 
-class NotificacionModel extends Mysql {
+namespace App\Models;
 
-  public function __construct() {
-    parent::__construct();
-  }
+use App\Librerias\Core\Mysql;
 
-  function insertNotificacion(string $tipo, $id_tipo, $leido = NULL) {
-    $return = "";
-    //consultamos la existencia de categorias duplicadas
-    $recuest = $this->selectNotificacion($tipo, $id_tipo);
-
-    if (empty($recuest)) {//'pedido',1 , NULL
-      $query_insert = "INSERT INTO `notificaciones` (`tipo`, `id_tipo`, `leido`) VALUES (?,?,?)";
-      $arrData = array($tipo, $id_tipo, $leido);
-      $return = $this->insert($query_insert, $arrData);
-    } else {
-      $return = 'existe';
+class NotificacionModel extends Mysql
+{
+    public function __construct()
+    {
+        parent::__construct();
     }
-    return $return;
-  }
 
-  function updateNotificacion(string $tipo, $id_tipo, $leido = NULL) {
-    $recuest = $this->selectNotificacion($tipo, $id_tipo);
+    public function insertNotificacion(string $tipo, $id_tipo, $leido = null)
+    {
+        $id_not_existente = $this->selectNotificacion($tipo, $id_tipo);
 
-    if ($recuest > 0) {//'pedido',1 , NULL
-      $leido = $leido ? 1 : NULL;
-      $query_insert = "UPDATE `notificaciones` SET `leido` = ? WHERE `notificaciones`.`id_not` = ?";
-      $arrData = array($leido, $recuest);
-      $return = $this->update($query_insert, $arrData);
+        if (empty($id_not_existente)) {
+            $query_insert = "INSERT INTO `notificaciones` (`tipo`, `id_tipo`, `leido`) VALUES (?,?,?)";
+            $arrData = [$tipo, $id_tipo, $leido];
+            return $this->insert($query_insert, $arrData);
+        }
+        return 'existe';
     }
-  }
 
-  function selectNotificacion(string $tipo, int $id_tipo) {
-    return $this->select_column("SELECT id_not FROM notificaciones WHERE tipo = '{$tipo}' AND id_tipo = {$id_tipo} AND leido IS NULL");
-  }
+    public function updateNotificacion(string $tipo, $id_tipo, $leido = null)
+    {
+        $id_not = $this->selectNotificacion($tipo, $id_tipo);
 
-  function selectNotificacionesNoLeidas() {
-    return $this->select_all("SELECT `tipo`,`datecreated` ,COUNT(`id_not`) AS cantidad FROM notificaciones WHERE `leido` IS NULL GROUP BY `tipo`");
-  }
+        if ($id_not) {
+            $leido = $leido ? 1 : null;
+            $query_update = "UPDATE `notificaciones` SET `leido` = ? WHERE `id_not` = ?";
+            $arrData = [$leido, $id_not];
+            return $this->update($query_update, $arrData);
+        }
+        return 0;
+    }
 
-  function selectIdNotificacionestipo($tipo, $id_tipo, $leido = null) {
-    $leido = $leido ? '= 1' : 'IS NULL';
-    return $this->select_all_column("SELECT id_not FROM notificaciones WHERE tipo = '{$tipo}' AND id_tipo = {$id_tipo} AND leido = $leido");
-  }
+    public function selectNotificacion(string $tipo, int $id_tipo): ?int
+    {
+        $sql = "SELECT id_not FROM notificaciones WHERE tipo = ? AND id_tipo = ? AND leido IS NULL";
+        $result = $this->select($sql, [$tipo, $id_tipo]);
+        return $result['id_not'] ?? null;
+    }
 
+    public function selectNotificacionesNoLeidas(): array
+    {
+        $sql = "SELECT `tipo`, `datecreated`, COUNT(`id_not`) AS cantidad
+                FROM notificaciones
+                WHERE `leido` IS NULL
+                GROUP BY `tipo`";
+        return $this->select_all($sql);
+    }
 }

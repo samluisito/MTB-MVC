@@ -2,16 +2,14 @@
 
 declare(strict_types=1);
 
+use App\Librerias\Core\Conexion;
+
 /**
  * --------------------------------------------------------------------------
  * Front Controller
  * --------------------------------------------------------------------------
  *
- * Este archivo es el único punto de entrada para todas las solicitudes a la
- * aplicación. Se encarga de inicializar el entorno, parsear la URL y
- * delegar el control al script de carga principal que manejará el enrutamiento.
- *
- * @version 1.4.0
+ * @version 2.0.1
  * @author Jules
  */
 
@@ -28,12 +26,13 @@ if (session_status() === PHP_SESSION_NONE) {
 
 /*
 |--------------------------------------------------------------------------
-| Carga de Archivos del Núcleo
+| Carga de Archivos del Núcleo y Autoloader de Composer
 |--------------------------------------------------------------------------
 */
-require_once __DIR__ . '/Helpers/Helpers.php';
-require_once __DIR__ . '/Librerias/Core/Autoload.php';
-require_once __DIR__ . '/Librerias/Core/Load.php';
+// Se utiliza DIRECTORY_SEPARATOR para asegurar la compatibilidad entre sistemas operativos.
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'Librerias' . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'Helpers' . DIRECTORY_SEPARATOR . 'Helpers.php';
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'Librerias' . DIRECTORY_SEPARATOR . 'Core' . DIRECTORY_SEPARATOR . 'Load.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -59,8 +58,6 @@ if (count($arrUrl) > 2) {
 */
 $host = $_SERVER['HTTP_HOST'];
 
-// La detección del entorno local ahora es más robusta para soportar subdominios locales.
-// Comprueba si el host es 'localhost', una IP local, o si termina en '.localhost'.
 $isLocal = ($host === 'localhost'
     || str_starts_with($host, '127.0.0.1')
     || str_starts_with($host, '192.')
@@ -79,14 +76,11 @@ if ($isLocal) {
     define('TPO_SERV_LOCAL', 1);
     define('BASE_URL', $_SERVER['REQUEST_SCHEME'] . '://' . $host . '/' . $rootFolder);
 
-    // En local, el identificador del inquilino puede ser el subdominio o un valor por defecto.
-    // Si es 'localhost' sin subdominio, o solo una IP, usamos 'mitiendabit'.
     $tenantIdentifier = (count($hostParts) > 1 && $hostParts[0] !== 'localhost') ? $hostParts[0] : 'mitiendabit';
 
 } else {
     define('TPO_SERV_LOCAL', 0);
     define('BASE_URL', $_SERVER['REQUEST_SCHEME'] . '://' . $host);
-    // En producción, el subdominio es el identificador del inquilino.
     $tenantIdentifier = $hostParts[0];
 }
 
@@ -98,14 +92,11 @@ define('BASE_CLIENTE', '/');
 | Inicialización y Cierre de la Conexión a la Base de Datos
 |--------------------------------------------------------------------------
 */
-// Se instancia la clase `Conexion` para establecer la conexión a la BD.
-new Conexion();
+$dbConnection = new Conexion();
 
-// Se registra una función para cerrar la conexión al final del script.
-register_shutdown_function(function () {
-    $conexion = new Conexion(); // No creará una nueva conexión gracias al patrón Singleton.
-    $connection = $conexion->getConexion();
-    if ($connection instanceof mysqli && $connection->thread_id) {
+register_shutdown_function(function () use ($dbConnection) {
+    $connection = $dbConnection->getConexion();
+    if ($connection instanceof \mysqli && $connection->thread_id) {
         $connection->close();
     }
 });
@@ -118,11 +109,8 @@ register_shutdown_function(function () {
 $controller = loadController($controllerName);
 
 if ($controller === null || !method_exists($controller, $methodName)) {
-    // Si el controlador o el método no existen, se carga el script de error
-    // que se encarga de mostrar la página 404 y finalizar la ejecución.
-    require_once __DIR__ . '/Controllers/Error.php';
-    exit();
+    $errorController = loadController('Error');
+    $errorController->notFound();
+} else {
+    $controller->{$methodName}($params);
 }
-
-// Se ejecuta el método del controlador con los parámetros.
-$controller->{$methodName}($params);

@@ -2,36 +2,52 @@
 
 declare(strict_types=1);
 
-class VisitasModel extends Mysql {
+namespace App\Models;
 
-  public function __construct() {
-    parent::__construct();
-  }
+use App\Librerias\Core\Mysql;
 
-  function registrarVisita($ip, $pagina, $url, $dispositivo, $dispositivoOS, $pais, $ciudad, $localidad, $idnav, $idUser) {
-    $user_agent = $_SERVER['HTTP_USER_AGENT'];
-    $sql = 'INSERT INTO visitas(ip, pagina, url, dispositivo,os,pais,ciudad,localidad,navegador_id,user_id,user_agent) VALUES(?,?,?,?,?,?,?,?,?,?,?)';
-    $arrData = array($ip, $pagina, $url, $dispositivo, $dispositivoOS, $pais, $ciudad, $localidad, $idnav, $idUser, $user_agent);
-    $sentencia = $this->insert($sql, $arrData);
-    return $sentencia > 0 ? true : false;
-  }
+class VisitasModel extends Mysql
+{
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
-  function getVisitasSinCity($cant) {
-    return $this->select_all("SELECT `idvisita`,`ip`,`pais`,`ciudad`,`localidad` 
-                              FROM `visitas` WHERE
-                              `pais` = '' OR `pais` IS null OR
-                              `ciudad` = '' OR `ciudad` IS null OR 
-                              `localidad` ='' OR `localidad` IS null ORDER BY `ciudad` ASC LIMIT $cant ");
+    public function registrarVisita(
+        string $ip,
+        string $pagina,
+        string $url,
+        string $dispositivo,
+        string $dispositivoOS,
+        ?string $pais,
+        ?string $ciudad,
+        ?string $localidad,
+        string $idnav,
+        ?int $idUser
+    ): bool {
+        $user_agent = $_SERVER['HTTP_USER_AGENT'];
+        $sql = 'INSERT INTO visitas(ip, pagina, url, dispositivo, os, pais, ciudad, localidad, navegador_id, user_id, user_agent) VALUES(?,?,?,?,?,?,?,?,?,?,?)';
+        $arrData = [$ip, $pagina, $url, $dispositivo, $dispositivoOS, $pais, $ciudad, $localidad, $idnav, $idUser, $user_agent];
+        $sentencia = $this->insert($sql, $arrData);
+        return $sentencia > 0;
+    }
 
-//    return $this->select_all("SELECT `idvisita`,`ip`,`pais`,`ciudad`,`localidad` FROM visitas WHERE `ciudad` = 'Buenos Aires F.D.' LIMIT $cant;");
-  }
+    public function getVisitasSinCity(int $cant): array
+    {
+        $sql = "SELECT `idvisita`, `ip`, `pais`, `ciudad`, `localidad`
+                FROM `visitas`
+                WHERE `pais` = '' OR `pais` IS NULL OR
+                      `ciudad` = '' OR `ciudad` IS NULL OR
+                      `localidad` = '' OR `localidad` IS NULL
+                ORDER BY `ciudad` ASC LIMIT ?";
+        return $this->select_all($sql, [$cant]);
+    }
 
-  function updateGeolocalizacionVisita($pais, $ciudad, $localidad, $id) {
-    $sql = 'UPDATE `visitas` SET `pais` = ?, `ciudad` = ?, `localidad` = ? WHERE `visitas`.`idvisita` = ?';
-    $arrData = array($pais, $ciudad, $localidad, $id);
-    $sentencia = $this->update($sql, $arrData);
-
-    return $sentencia > 0 ? true : false;
-  }
-
+    public function updateGeolocalizacionVisita(?string $pais, ?string $ciudad, ?string $localidad, int $id): bool
+    {
+        $sql = 'UPDATE `visitas` SET `pais` = ?, `ciudad` = ?, `localidad` = ? WHERE `idvisita` = ?';
+        $arrData = [$pais, $ciudad, $localidad, $id];
+        $sentencia = $this->update($sql, $arrData);
+        return $sentencia > 0;
+    }
 }

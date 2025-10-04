@@ -2,114 +2,92 @@
 
 declare(strict_types=1);
 
-class Visitas extends Controllers {
+namespace App\Controllers;
 
-  public function __construct() {
-    parent::__construct();
-  }
+use App\Librerias\Core\Controllers;
 
-  /* ----------------------------------------------------------------------------------------------------------------------- */
-
-  public function Visitas() {//primer metodo del controlador es llamdo i no hay un metodo definido en la url, entonces retornamos a home
-    header('location:' . base_url());
-    exit();
-  }
-
-  /* registrar visita --------------------------------------------------------- */
-
-  function registrar_visita() {
-    if (isBot($_SERVER['HTTP_USER_AGENT'])) {
-      exit("bot");
+class Visitas extends Controllers
+{
+    public function __construct()
+    {
+        parent::__construct();
     }
-    
-    $payload = json_decode(file_get_contents("php://input"));
-    if (!$payload) {
-      exit();
+
+    public function visitas()
+    {
+        header('location:' . base_url());
+        exit();
     }
-    $ip = getUserIP() ?? "";
-    $meta = $this->geolocaliuzarPorIp($ip);
 
-    $dispositivo = detectar_dispositivo(); //dispositivoTipo();
-    $dispositivoOS = dispositivoOS();
-    $pais = $meta['pais'];
-    $ciudad = $meta['ciudad'];
-    $localidad = $meta['localidad'];
-    $idUser = isset($_SESSION['idUser']) ? $_SESSION['idUser'] : null;
-//      dep($payload);
-    $request = $this->model->registrarVisita($ip, $payload->pagina, $payload->url, $dispositivo, $dispositivoOS, $pais, $ciudad, $localidad, $payload->idnav, $idUser);
-    echo json_encode(array($request));
-  }
+    public function registrar_visita()
+    {
+        if (isBot($_SERVER['HTTP_USER_AGENT'])) {
+            exit("bot");
+        }
 
-  public function getUnicoId() {
-    $id = uniqid('', true);
-    echo json_encode(array('id' => $id));
-  }
+        $payload = json_decode(file_get_contents("php://input"));
+        if (!$payload) {
+            exit();
+        }
 
-//----------------------------------------------------------------------------------
-  function mi_ip() {
-    echo getUserIP();
-  }
+        $ip = getUserIP() ?? "";
+        $meta = $this->geolocalizarPorIp($ip);
 
-  function geolocalizar_visita($cant) {
-    $cant = intval($cant);
-    $cant = $cant ?: 1;
-    $visitas = $this->model->getVisitasSinCity($cant);
+        $idUser = $_SESSION['idUser'] ?? null;
 
-    foreach ($visitas as $key => $visita) {
-      print $key;
-
-      dep($visita);
-      $id = $visita['idvisita'];
-      $ip = $visita['ip'];
-
-      $meta = $this->geolocaliuzarPorIp($ip);
-      $pais = $meta['pais'];
-      $ciudad = $meta['ciudad'];
-      $localidad = $meta['localidad'];
-
-      $request = $this->model->updateGeolocalizacionVisita($pais, $ciudad, $localidad, $id);
-
-      if ($request) {
-        print('Actualizado ---------------------------------------');
-      } else {
-        print('no actualizado ---------------------------------------');
-      }
-      dep(array($id, $meta));
-      print("==============================================================================");
+        $request = $this->model->registrarVisita(
+            $ip,
+            $payload->pagina,
+            $payload->url,
+            detectar_dispositivo(),
+            dispositivoOS(),
+            $meta['pais'],
+            $meta['ciudad'],
+            $meta['localidad'],
+            $payload->idnav,
+            $idUser
+        );
+        echo json_encode([$request]);
     }
-  }
 
-  private function geolocaliuzarPorIp($ip) {
-    /* Consulta a 3 proveedores de geolocalizacion ip, si el primero no tiene estatus ok, pasa al seguendo y luego al 3ro de ser necesaro */
-    $url = 'https://ipgeolocation.abstractapi.com/v1/?api_key=d7a1659b36a34c48a946376560b1b421&ip_address=' . $ip;
-    $operador = 'error';
-    $meta = (curlConection($url));
-    if (empty($meta->error) && ($meta->country != null && $meta->region != null && $meta->city != null)) {
-      $operador = "1-ipgeo ";
-      $pais = $meta->country ?: null;
-      $ciudad = $meta->region ?: null;
-      $localidad = $meta->city ?: null;
-    } else {
-      $url = "http://api.ipapi.com/api/" . $ip . "?access_key=5b3be379c97d841411f9760677bfbab9";
-      $meta = json_decode(file_get_contents($url), true);
-      if (empty($meta['success'])) {
-        $operador = "2-ipapi";
-        $pais = $meta['country_name'] ?: null;
-        $ciudad = $meta['region_name'] ?: null;
-        $localidad = $meta['city'] ?: null;
-      } else {
-        $operador = "3-Geoplugin ";
-        $meta = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $ip));
-        $pais = $meta['geoplugin_countryName'] ?: null;
-        $ciudad = $meta['geoplugin_regionName'] ?: ($meta['geoplugin_region'] ?: null);
-        $localidad = $meta['geoplugin_city'] ?: null;
-      }
+    public function getUnicoId()
+    {
+        echo json_encode(['id' => uniqid('', true)]);
     }
-    return array(
-      'operador' => $operador,
-      'pais' => $pais,
-      'ciudad' => $ciudad,
-      'localidad' => $localidad);
-  }
 
+    private function geolocalizarPorIp($ip)
+    {
+        // Provider 1: Abstract API
+        $url1 = 'https://ipgeolocation.abstractapi.com/v1/?api_key=d7a1659b36a34c48a946376560b1b421&ip_address=' . $ip;
+        $meta1 = curlConection($url1);
+        if (empty($meta1->error) && ($meta1->country ?? null) && ($meta1->region ?? null) && ($meta1->city ?? null)) {
+            return [
+                'operador' => "1-ipgeo",
+                'pais' => $meta1->country,
+                'ciudad' => $meta1->region,
+                'localidad' => $meta1->city
+            ];
+        }
+
+        // Provider 2: ipapi.com
+        $url2 = "http://api.ipapi.com/api/" . $ip . "?access_key=5b3be379c97d841411f9760677bfbab9";
+        $meta2 = json_decode(file_get_contents($url2), true);
+        if (empty($meta2['success']) && ($meta2['country_name'] ?? null)) {
+            return [
+                'operador' => "2-ipapi",
+                'pais' => $meta2['country_name'],
+                'ciudad' => $meta2['region_name'],
+                'localidad' => $meta2['city']
+            ];
+        }
+
+        // Provider 3: Geoplugin (Fallback)
+        $meta3 = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $ip));
+        return [
+            'operador' => "3-Geoplugin",
+            'pais' => $meta3['geoplugin_countryName'] ?? null,
+            'ciudad' => $meta3['geoplugin_regionName'] ?? ($meta3['geoplugin_region'] ?? null),
+            'localidad' => $meta3['geoplugin_city'] ?? null
+        ];
+    }
 }

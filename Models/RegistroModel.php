@@ -2,56 +2,48 @@
 
 declare(strict_types=1);
 
-class RegistroModel extends Mysql {
+namespace App\Models;
 
-  public function __construct() {
-    parent::__construct();
-  }
+use App\Librerias\Core\Mysql;
 
-
- 
-  /* -------------------------------------------------------------------------------------------------------- */
-
-  public function selectMail(string $email) {
-    $this->con = new Mysql();
-    $this->strEmail = $email;
-    $return = 0;
-    //consultamos la existencia del mail '
-    $sql = "SELECT idpersona FROM persona WHERE email_user = '{$this->strEmail}' ";
-
-    $request = $this->con->select($sql);
-
-    if (empty($request)) {
-      $return = "OK";
-    } else {
-      $return = "Exist";
+class RegistroModel extends Mysql
+{
+    public function __construct()
+    {
+        parent::__construct();
     }
 
-    return $return;
-  }
-
-  /* -------------------------------------------------------------------------------------------------------- */
-
-  public function insertCliente(string $nombre, string $apellido, int $telefono = null, string $email,
-      string $sexo, string $direccion = null, string $localidad, string $ciudad, string $pais = null,
-      string $password, int $idTpoRol, string $oauth_provider = null, string $oauth_uid = null, string $img = null) {
-    $return = 0;
-
-    //consultamos la existencia de una identificacion o imail duplicado    or identificacion ='{$this->strIdentificacion}'
-    $request = $this->select("SELECT * FROM persona WHERE email_user = '{$email}' ");
-    if (empty($request)) {/* si la consulta es nul  entonce insertamos el Usuario */
-      $query_insert = "INSERT INTO persona (nombres, apellidos, telefono, email_user, sexo,direccionfiscal,localidad,ciudad,
-                        pais, password, rolid,oauth_provider,oauth_uid,img) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-      $arrData = array($nombre, $apellido, $telefono, $email, $sexo, $direccion, $localidad,
-        $ciudad, $pais, $password, $idTpoRol, $oauth_provider, $oauth_uid, $img,);
-
-      $return = $this->insert($query_insert, $arrData);
-    } else {
-      $return = "exist";
+    public function selectMail(string $email): string
+    {
+        $sql = "SELECT idpersona FROM persona WHERE email_user = ?";
+        $request = $this->select($sql, [$email]);
+        return empty($request) ? "OK" : "Exist";
     }
 
-    return $return;
-  }
+    public function insertCliente(
+        string $nombre,
+        string $apellido,
+        ?int $telefono,
+        string $email,
+        string $sexo,
+        ?string $direccion,
+        string $localidad,
+        string $ciudad,
+        ?string $pais,
+        string $password,
+        int $idTpoRol,
+        ?string $oauth_provider = null,
+        ?string $oauth_uid = null,
+        ?string $img = null
+    ) {
+        $sql = "SELECT idpersona FROM persona WHERE email_user = ?";
+        $request = $this->select($sql, [$email]);
 
-  /* -------------------------------------------------------------------------------------------------------- */
+        if (empty($request)) {
+            $query_insert = "INSERT INTO persona (nombres, apellidos, telefono, email_user, sexo, direccionfiscal, localidad, ciudad, pais, password, rolid, oauth_provider, oauth_uid, img) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            $arrData = [$nombre, $apellido, $telefono, $email, $sexo, $direccion, $localidad, $ciudad, $pais, $password, $idTpoRol, $oauth_provider, $oauth_uid, $img];
+            return $this->insert($query_insert, $arrData);
+        }
+        return "exist";
+    }
 }

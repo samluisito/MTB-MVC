@@ -2,31 +2,50 @@
 
 declare(strict_types=1);
 
+namespace App\Librerias\Core;
+
+/**
+ * Clase base para todos los controladores de la aplicación.
+ *
+ * Se encarga de cargar automáticamente el modelo y la vista correspondientes
+ * al controlador que se está ejecutando.
+ *
+ * @version 2.1.0
+ * @author Jules
+ */
 class Controllers
 {
-    protected ?object $model = null;
+    /** @var Mysql|null El modelo asociado al controlador. */
+    protected ?Mysql $model = null;
+
+    /** @var Views La vista asociada al controlador. */
     protected Views $views;
-    protected  $data = []; // Propiedad tipada como array
+
+    /** @var array Datos que se pasarán a la vista. */
+    protected array $data = [];
 
     public function __construct()
     {
-        $className = get_class($this);
+        // Obtiene el nombre corto de la clase del controlador (ej. 'Home' de 'App\Controllers\Home').
+        $fullClassName = get_class($this);
+        $className = substr($fullClassName, strrpos($fullClassName, '\\') + 1);
+
         $this->views = new Views($className);
         $this->loadModel($className);
     }
 
     /**
      * Carga el modelo correspondiente para el controlador.
-     * Por ejemplo, para el controlador 'Users', intenta cargar 'UsersModel'.
-     * También desencadena tareas relacionadas con la sesión después de cargar el modelo.
+     * El modelo debe seguir la convención de nomenclatura 'NombreControladorModel'.
+     *
+     * @param string $controllerName El nombre corto del controlador.
      */
-    private function loadModel(string $className): void
+    private function loadModel(string $controllerName): void
     {
-        $modelClass = $className . 'Model';
-        $modelFile = __DIR__ . '/../../Models/' . $modelClass . '.php';
+        // Construye el nombre completo de la clase del modelo con su namespace.
+        $modelClass = "App\\Models\\" . $controllerName . 'Model';
 
-        if (file_exists($modelFile)) {
-            require_once $modelFile;
+        if (class_exists($modelClass)) {
             $this->model = new $modelClass();
 
             // Estos métodos solo pueden ejecutarse si se carga un modelo con éxito.
@@ -87,7 +106,12 @@ class Controllers
         }
     }
 
-    public function getModel(): ?object
+    /**
+     * Devuelve la instancia del modelo.
+     *
+     * @return Mysql|null
+     */
+    public function getModel(): ?Mysql
     {
         return $this->model;
     }

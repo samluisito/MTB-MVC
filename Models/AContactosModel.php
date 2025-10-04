@@ -2,64 +2,48 @@
 
 declare(strict_types=1);
 
-class AContactosModel extends Mysql {
+namespace App\Models;
 
-  private $idcontacto;
-  private $origen;
-  private $nombre;
-  private $apellido;
-  private $telefono;
-  private $email;
-  private $mensaje;
-  private $ip_contacto;
-  private $geoplugin;
-  private $localidad;
-  private $ciudad;
-  private $pais;
-  private $navegador;
+use App\Librerias\Core\Mysql;
 
-  public function __construct() {
-    //echo 'mensaje desde el modelo home';
-    parent::__construct();
-  }
+class AContactosModel extends Mysql
+{
+    private int $idcontacto;
+    private string $origen;
+    private string $nombre;
+    private string $apellido;
+    private string $telefono;
+    private string $email;
+    private string $mensaje;
+    private string $ip_contacto;
+    private string $geoplugin;
+    private string $localidad;
+    private string $ciudad;
+    private string $pais;
+    private string $navegador;
 
-  public function selectContactos() {
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
-    //EXTRAE DATOS DE LA TABLA PERSONAS CON EL ROL DE CLIENTES
-    $sql = "SELECT  idcontacto,
-                        origen,
-                        nombre,
-                        apellido,
-                        telefono,
-                        email,
-                        localidad,
-                        DATE_FORMAT(datecreated, '%d-%m-%Y') as fechaRegistro
+    public function selectContactos(): array
+    {
+        $sql = "SELECT idcontacto, origen, nombre, apellido, telefono, email, localidad,
+                       DATE_FORMAT(datecreated, '%d-%m-%Y') as fechaRegistro
                 FROM contacto 
-                ORDER BY idcontacto DESC                ";
-    $request = $this->select_all($sql);
-    return $request;
-  }
+                ORDER BY idcontacto DESC";
+        return $this->select_all($sql);
+    }
 
-//EXTRAE EXTRAE UN ROL, PARAMETRO DE ENTRADA EL ID A BUSCAR, DEVUELVE UN ARRAY CON LOS DATOS DEL ROL
-  public function selectContacto(int $id) {
-    $this->idcontacto = $id;
-    $sql = "SELECT  idcontacto,
-                        origen,
-                        nombre,
-                        apellido,
-                        telefono,
-                        email,
-                        mensaje,
-                        localidad,
-                        ciudad,
-                        pais,
-                        navegador,
-                        DATE_FORMAT(datecreated, '%d-%m-%Y') as fechaRegistro
+    public function selectContacto(int $id): ?array
+    {
+        $this->idcontacto = $id;
+        $sql = "SELECT idcontacto, origen, nombre, apellido, telefono, email, mensaje,
+                       localidad, ciudad, pais, navegador,
+                       DATE_FORMAT(datecreated, '%d-%m-%Y') as fechaRegistro
                 FROM contacto 
-                WHERE idcontacto = '{$this->idcontacto}' ";
-    $request = $this->select($sql);
-    return $request;
-  }
-
-
+                WHERE idcontacto = ?";
+        return $this->select($sql, [$this->idcontacto]);
+    }
 }

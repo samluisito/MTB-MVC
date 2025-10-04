@@ -2,6 +2,11 @@
 
 declare(strict_types=1);
 
+namespace App\Librerias\Core;
+
+use mysqli;
+use mysqli_result;
+
 /**
  * Capa de Abstracción de Base de Datos (MySQL).
  *
@@ -9,7 +14,7 @@ declare(strict_types=1);
  * y proporciona métodos para realizar operaciones CRUD (Create, Read, Update, Delete).
  * Simplifica la ejecución de consultas preparadas y el manejo de resultados.
  *
- * @version 2.0.1
+ * @version 2.1.0
  * @author Jules
  */
 class Mysql extends Conexion

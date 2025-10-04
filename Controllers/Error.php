@@ -2,34 +2,35 @@
 
 declare(strict_types=1);
 
-class Errors extends Controllers {
+namespace App\Controllers;
 
-  public function __construct() {
-    parent::__construct();
-  }
+use App\Librerias\Core\Controllers;
 
-  public function notFound() {
-    if (isset($_SESSION['info_empresa'])) {
-      /*       * ******************************************* */
-      include_once __DIR__ . '/../Controllers/Home.php';
-      $this->data = new Home();
-      $data['header'] = $this->data->data_header('ERROR 404');
-      $data['footer'] = $this->data->data_footer();
-      /*       * ******************************************* */
-      $empresa = $_SESSION['info_empresa'];
-      $data['empresa'] = $empresa;
-      $this->views->getView("error", $data);
-    } else {
-      $data['page_name'] = 'ERROR 404';
-      $data['page_title'] = $data['page_name'];
-      $data['logo_desktop'] = DIR_MEDIA . 'images/upss-error.png';
-      $data['shortcut_icon'] = DIR_MEDIA . 'images/upss-error.png';
-      $this->views->getView("error", $data);
+class Error extends Controllers
+{
+    public function __construct()
+    {
+        parent::__construct();
     }
-  }
 
+    public function notFound()
+    {
+        if (isset($_SESSION['info_empresa'])) {
+            // Cargar datos del controlador Home para el encabezado y pie de página
+            $homeController = new Home();
+            $data['header'] = $homeController->data_header('ERROR 404');
+            $data['footer'] = $homeController->data_footer();
+
+            $empresa = $_SESSION['info_empresa'];
+            $data['empresa'] = $empresa;
+            $this->views->getView("error", $data);
+        } else {
+            // Vista de error simple si la información de la empresa no está disponible
+            $data['page_name'] = 'ERROR 404';
+            $data['page_title'] = $data['page_name'];
+            $data['logo_desktop'] = DIR_MEDIA . 'images/upss-error.png';
+            $data['shortcut_icon'] = DIR_MEDIA . 'images/upss-error.png';
+            $this->views->getView("error", $data);
+        }
+    }
 }
-
-$notFound = new Errors();
-$notFound->notFound();
-

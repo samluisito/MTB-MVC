@@ -2,6 +2,17 @@
 
 declare(strict_types=1);
 
+namespace App\Librerias\Core;
+
+/**
+ * Clase encargada de renderizar las vistas.
+ *
+ * Determina la ruta al archivo de la vista basándose en el controlador
+ * que la invoca y pasa los datos necesarios para su renderización.
+ *
+ * @version 2.1.0
+ * @author Jules
+ */
 class Views
 {
     /**

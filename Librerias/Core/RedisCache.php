@@ -2,10 +2,19 @@
 
 declare(strict_types=1);
 
+namespace App\Librerias\Core;
+
+use Redis;
+use RedisException;
+
+// Se carga manualmente el archivo de configuración que define las constantes de Redis.
 require_once __DIR__ . '/../../Config/RedisConfig.php';
 
 /**
  * Clase Singleton para manejar las operaciones de caché con Redis.
+ *
+ * @version 2.1.0
+ * @author Jules
  */
 class RedisCache
 {

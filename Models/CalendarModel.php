@@ -1,255 +1,117 @@
 <?php
+
 declare(strict_types=1);
 
-class CalendarModel extends Mysql {
+namespace App\Models;
 
-    private $intIdUser;
-    private $strIdentificacion;
-    private $strNombre;
-    private $strApellido;
-    private $strEmail;
-    private $intTelefono;
-    private $intTipoRolId;
-    private $intStatus;
-    private $strPassword;
-    private $strtoken;
-    private $strNit;
-    private $strNombreFiscal;
-    private $strDireccionFiscal;
+use App\Librerias\Core\Mysql;
 
-    public function __construct() {
-//echo 'mensaje desde el modelo home';
+class CalendarModel extends Mysql
+{
+    private int $intIdUser;
+    private string $strIdentificacion;
+    private string $strNombre;
+    private string $strApellido;
+    private string $strEmail;
+    private int $intTelefono;
+    private int $intTipoRolId;
+    private int $intStatus;
+    private string $strPassword;
+    private string $strtoken;
+    private string $strNit;
+    private string $strNombreFiscal;
+    private string $strDireccionFiscal;
+
+    public function __construct()
+    {
         parent::__construct();
     }
 
-    
-    
-    public function insertUsuario(string $identificacion,
-            string $nombre, string $Apellido, int $telefono,
-            string $email, string $password, int $idtporol,
-            int $status) {
-
+    public function insertUsuario(
+        string $identificacion,
+        string $nombre,
+        string $apellido,
+        int $telefono,
+        string $email,
+        string $password,
+        int $idtporol,
+        int $status
+    ) {
         $this->strIdentificacion = $identificacion;
         $this->strNombre = $nombre;
-        $this->strApellido = $Apellido;
+        $this->strApellido = $apellido;
         $this->strEmail = $email;
         $this->intTelefono = $telefono;
         $this->intTipoRolId = $idtporol;
         $this->intStatus = $status;
         $this->strPassword = $password;
-        $return = 0;
 
-
-        //consultamos la existencia de una identificacion o imail duplicado
-        $sql = "SELECT * FROM persona WHERE 
-           email_user = '{$this->strEmail}'
-           or identificacion ='{$this->strIdentificacion}'";
-
-        $request = $this->select_all($sql);
+        $sql = "SELECT * FROM persona WHERE email_user = ? OR identificacion = ?";
+        $request = $this->select($sql, [$this->strEmail, $this->strIdentificacion]);
 
         if (empty($request)) {
-            // si la consulta es nul  entonce insertamos el Usuario
-            $query_insert = "INSERT INTO persona (
-                	identificacion,
-                        nombres, apellidos,
-                        telefono, email_user,
-                        password,
-                        rolid, status) VALUES (?,?,?,?,?,?,?,?)";
-
-            $arrData = array(
-                $this->strIdentificacion,
-                $this->strNombre,
-                $this->strApellido,
-                $this->intTelefono,
-                $this->strEmail,
-                $this->strPassword,
-                $this->intTipoRolId,
-                $this->intStatus);
-
-            $request_insert = $this->insert($query_insert, $arrData);
-            $return = $request_insert;
-        } else {
-            $return = "exist";
+            $query_insert = "INSERT INTO persona (identificacion, nombres, apellidos, telefono, email_user, password, rolid, status) VALUES (?,?,?,?,?,?,?,?)";
+            $arrData = [$this->strIdentificacion, $this->strNombre, $this->strApellido, $this->intTelefono, $this->strEmail, $this->strPassword, $this->intTipoRolId, $this->intStatus];
+            return $this->insert($query_insert, $arrData);
         }
-        return $return;
+        return "exist";
     }
 
-    public function selectUsuarios() {
-//EXTRAE ROLES
-        $sql = "SELECT a.idpersona, a.identificacion,
-                       a.nombres, a.apellidos,
-                       a.telefono, a.email_user,
-                       a.status, b.nombrerol
-                FROM persona a INNER JOIN rol b
-                ON a.rolid = b.idrol
-                WHERE  a.status != 0";
-        $request = $this->select_all($sql);
-        return $request;
+    public function selectUsuarios(): array
+    {
+        $sql = "SELECT p.idpersona, p.identificacion, p.nombres, p.apellidos, p.telefono, p.email_user, p.status, r.nombrerol
+                FROM persona p
+                INNER JOIN rol r ON p.rolid = r.idrol
+                WHERE p.status != 0";
+        return $this->select_all($sql);
     }
 
-    public function selectUser(int $idUser) {
-//EXTRAE EXTRAE UN ROL, PARAMETRO DE ENTRADA EL ID A BUSCAR, DEVUELVE UN ARRAY CON LOS DATOS DEL ROL
+    public function selectUser(int $idUser): ?array
+    {
         $this->intIdUser = $idUser;
-        $sql = "SELECT a.idpersona, a.identificacion,
-                       a.nombres, a.apellidos,
-                       a.telefono, a.email_user,
-                       a.nit, a.nombrefiscal,
-                       a.direccionfiscal,
-                       b.idrol, b.nombrerol,
-                       a.status, DATE_FORMAT(a.datecreated, '%d-%m-%Y') as fechaRegistro 
-                FROM persona a 
-                INNER JOIN rol b
-                ON a.rolid = b.idrol
-                WHERE a.idpersona = '{$this->intIdUser}' ";
-        $request = $this->select($sql);
-        return $request;
+        $sql = "SELECT p.idpersona, p.identificacion, p.nombres, p.apellidos, p.telefono, p.email_user,
+                       p.nit, p.nombrefiscal, p.direccionfiscal, r.idrol, r.nombrerol,
+                       p.status, DATE_FORMAT(p.datecreated, '%d-%m-%Y') as fechaRegistro
+                FROM persona p
+                INNER JOIN rol r ON p.rolid = r.idrol
+                WHERE p.idpersona = ?";
+        return $this->select($sql, [$this->intIdUser]);
     }
 
-    public function updateUsuario(int $idUser, string $identificacion,
-            string $nombre, string $Apellido, int $telefono, string $email,
-            string $password, int $idtporol, int $status) {
-
+    public function updateUsuario(
+        int $idUser,
+        string $identificacion,
+        string $nombre,
+        string $apellido,
+        int $telefono,
+        string $email,
+        string $password,
+        int $idtporol,
+        int $status
+    ) {
         $this->intIdUser = $idUser;
         $this->strIdentificacion = $identificacion;
         $this->strNombre = $nombre;
-        $this->strApellido = $Apellido;
+        $this->strApellido = $apellido;
         $this->strEmail = $email;
         $this->intTelefono = $telefono;
         $this->intTipoRolId = $idtporol;
         $this->intStatus = $status;
         $this->strPassword = $password;
 
-        $return = 0;
-
-        //consultamos la existencia de una identificacion o imail duplicado
-        $sql = "SELECT * FROM persona 
-            WHERE  email_user = '{$this->strEmail}' AND idpersona != '{$this->intIdUser}'
-            or identificacion ='{$this->strIdentificacion}'AND idpersona != '{$this->intIdUser}'";
-
-        $request = $this->select_all($sql);
-
-
+        $sql = "SELECT * FROM persona WHERE (email_user = ? OR identificacion = ?) AND idpersona != ?";
+        $request = $this->select($sql, [$this->strEmail, $this->strIdentificacion, $this->intIdUser]);
 
         if (empty($request)) {
             if ($this->strPassword != "") {
-                $sql_update = "UPDATE persona SET 
-                	identificacion = ?,
-                        nombres = ?, apellidos = ?,
-                        telefono = ?, email_user = ?,
-                        password = ?,
-                        rolid = ?, status = ? WHERE idpersona = '{$this->intIdUser}'";
-
-                $arrData = array(
-                    $this->strIdentificacion,
-                    $this->strNombre,
-                    $this->strApellido,
-                    $this->intTelefono,
-                    $this->strEmail,
-                    $this->strPassword,
-                    $this->intTipoRolId,
-                    $this->intStatus);
+                $sql_update = "UPDATE persona SET identificacion = ?, nombres = ?, apellidos = ?, telefono = ?, email_user = ?, password = ?, rolid = ?, status = ? WHERE idpersona = ?";
+                $arrData = [$this->strIdentificacion, $this->strNombre, $this->strApellido, $this->intTelefono, $this->strEmail, $this->strPassword, $this->intTipoRolId, $this->intStatus, $this->intIdUser];
             } else {
-                $sql_update = "UPDATE persona SET 
-                	identificacion = ?,
-                        nombres = ?, apellidos = ?,
-                        telefono = ?, email_user = ?,
-                        rolid = ?, status = ? WHERE idpersona = '{$this->intIdUser}'";
-
-                $arrData = array(
-                    $this->strIdentificacion,
-                    $this->strNombre,
-                    $this->strApellido,
-                    $this->intTelefono,
-                    $this->strEmail,
-                    //$this->strPassword,
-                    $this->intTipoRolId,
-                    $this->intStatus);
+                $sql_update = "UPDATE persona SET identificacion = ?, nombres = ?, apellidos = ?, telefono = ?, email_user = ?, rolid = ?, status = ? WHERE idpersona = ?";
+                $arrData = [$this->strIdentificacion, $this->strNombre, $this->strApellido, $this->intTelefono, $this->strEmail, $this->intTipoRolId, $this->intStatus, $this->intIdUser];
             }
-
-            $request_update = $this->update($sql_update, $arrData);
-            //$return = $request_insert;
-        } else {
-            return "exist";
+            return $this->update($sql_update, $arrData);
         }
-        return $request_update;
+        return "exist";
     }
-
-    public function deleteUser($idPersona) {
-
-        $this->intIdUser = $idPersona;
-        $sql = "UPDATE persona SET status = ? WHERE idpersona = $this->intIdUser";
-        $arrData = array(0);
-        $request = $this->update($sql, $arrData);
-        return $request;
-    }
-
-    public function updatePerfil(int $idUser, string $identificacion,
-            string $nombre, string $Apellido,
-            int $telefono, string $password
-    ) {
-
-        $this->intIdUser = $idUser;
-        $this->strIdentificacion = $identificacion;
-        $this->strNombre = $nombre;
-        $this->strApellido = $Apellido;
-        $this->intTelefono = $telefono;
-        $this->strPassword = $password;
-
-        if ($this->strPassword != "") {
-            $sql_update = "UPDATE persona SET 
-                	identificacion = ?,
-                        nombres = ?, apellidos = ?,
-                        telefono = ?,password = ?
-                        WHERE idpersona = '{$this->intIdUser}'";
-
-            $arrData = array(
-                $this->strIdentificacion,
-                $this->strNombre,
-                $this->strApellido,
-                $this->intTelefono,
-                $this->strPassword,
-            );
-        } else {
-            $sql_update = "UPDATE persona SET 
-                	identificacion = ?,
-                        nombres = ?, apellidos = ?,
-                        telefono = ?
-                        WHERE idpersona = '{$this->intIdUser}'";
-
-            $arrData = array(
-                $this->strIdentificacion,
-                $this->strNombre,
-                $this->strApellido,
-                $this->intTelefono,
-            );
-        }
-
-        $request_update = $this->update($sql_update, $arrData);
-        return $request_update;
-    }
-
-    public function updateDataFiscal(int $intIdUser,
-            string $strNit,
-            string $strNombreFiscal,
-            string $strDireccionFiscal) {
-
-        $this->intIdUser = $intIdUser;
-        $this->strNit = $strNit;
-        $this->strNombreFiscal = $strNombreFiscal;
-        $this->strDireccionFiscal = $strDireccionFiscal;
-
-        $sql_update = "UPDATE persona SET 
-                	nit = ?,
-                        nombrefiscal = ?, direccionfiscal = ?
-                        WHERE idpersona = '{$this->intIdUser}'";
-
-        $arrData = array(
-        $this->strNit,
-        $this->strNombreFiscal,
-        $this->strDireccionFiscal);
-        
-        $request_update = $this->update($sql_update, $arrData);
-        return $request_update;
-    }
-
 }
